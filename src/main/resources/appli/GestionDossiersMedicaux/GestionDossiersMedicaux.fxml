@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.hospital.controller.GestionDossiersMedicauxController">
+    <TableView fx:id="dossiersTable">
+        <columns>
+            <TableColumn text="Patient" fx:id="patientColumn"/>
+            <TableColumn text="Date d'arrivée" fx:id="dateArriveeColumn"/>
+            <TableColumn text="Symptômes" fx:id="symptomesColumn"/>
+            <TableColumn text="Niveau de gravité" fx:id="niveauGraviteColumn"/>
+        </columns>
+    </TableView>
+    <HBox spacing="10">
+        <Button text="Voir détails" onAction="#voirDetails"/>
+        <Button text="Hospitaliser" onAction="#hospitaliser"/>
+    </HBox>
+</VBox>
+

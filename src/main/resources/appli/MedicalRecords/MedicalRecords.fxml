@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml" fx:controller="com.hospital.controller.MedicalRecordsController">
+    <HBox spacing="10">
+        <ComboBox fx:id="patientComboBox" promptText="Sélectionner un patient"/>
+        <DatePicker fx:id="dateArriveeField" promptText="Date d'arrivée"/>
+        <TextField fx:id="symptomesField" promptText="Symptômes"/>
+        <ComboBox fx:id="niveauGraviteComboBox" promptText="Niveau de gravité"/>
+        <Button text="Ajouter Dossier" onAction="#addDossier"/>
+    </HBox>
+    <TableView fx:id="dossierTable">
+        <columns>
+            <TableColumn text="Patient" fx:id="patientColumn"/>
+            <TableColumn text="Date d'arrivée" fx:id="dateArriveeColumn"/>
+            <TableColumn text="Symptômes" fx:id="symptomesColumn"/>
+            <TableColumn text="Niveau de gravité" fx:id="niveauGraviteColumn"/>
+            <TableColumn text="État" fx:id="etatColumn"/>
+        </columns>
+    </TableView>
+</VBox>
+

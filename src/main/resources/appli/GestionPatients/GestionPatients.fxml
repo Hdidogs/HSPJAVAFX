@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.hospital.controller.GestionPatientsController">
+    <HBox spacing="10">
+        <TextField fx:id="nomField" promptText="Nom"/>
+        <TextField fx:id="prenomField" promptText="Prénom"/>
+        <TextField fx:id="numeroSecuriteSocialeField" promptText="Numéro de sécurité sociale"/>
+        <Button text="Ajouter Patient" onAction="#ajouterPatient"/>
+    </HBox>
+    <TableView fx:id="patientsTable">
+        <columns>
+            <TableColumn text="Nom" fx:id="nomColumn"/>
+            <TableColumn text="Prénom" fx:id="prenomColumn"/>
+            <TableColumn text="Numéro de sécurité sociale" fx:id="numeroSecuriteSocialeColumn"/>
+        </columns>
+    </TableView>
+</VBox>
+

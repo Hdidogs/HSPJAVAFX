@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.hospital.controller.DashboardController">
+    <top>
+        <MenuBar>
+            <Menu text="Patients">
+                <MenuItem text="Gérer les patients" onAction="#showPatientManagement"/>
+            </Menu>
+            <Menu text="Dossiers">
+                <MenuItem text="Gérer les dossiers médicaux" onAction="#showMedicalRecords"/>
+            </Menu>
+            <Menu text="Stock">
+                <MenuItem text="Gérer le stock" onAction="#showStockManagement"/>
+            </Menu>
+        </MenuBar>
+    </top>
+    <center>
+        <Label text="Bienvenue dans le Système de Gestion Hospitalière" style="-fx-font-size: 20px;"/>
+    </center>
+</BorderPane>
+
