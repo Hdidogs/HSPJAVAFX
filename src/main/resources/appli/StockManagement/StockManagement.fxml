@@ -1,19 +1,24 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<VBox spacing="10" xmlns:fx="http://javafx.com/fxml" fx:controller="com.hospital.controller.StockManagementController">
-    <HBox spacing="10">
-        <TextField fx:id="libelleField" promptText="Libellé"/>
-        <TextField fx:id="descriptionField" promptText="Description"/>
-        <ComboBox fx:id="niveauDangerositeComboBox" promptText="Niveau de dangerosité"/>
-        <TextField fx:id="quantiteField" promptText="Quantité"/>
-        <ComboBox fx:id="fournisseurComboBox" promptText="Fournisseur"/>
-        <Button text="Ajouter Produit" onAction="#addProduit"/>
-    </HBox>
-    <TableView fx:id="produitTable">
+<VBox spacing="20" xmlns:fx="http://javafx.com/fxml" fx:controller="com.hospital.controller.StockManagementController"
+      stylesheets="@../styles/global.css">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+    <Label text="Gestion des Stocks" styleClass="title"/>
+    <GridPane hgap="10" vgap="10">
+        <TextField fx:id="libelleField" promptText="Libellé" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="descriptionField" promptText="Description" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+        <ComboBox fx:id="niveauDangerositeComboBox" promptText="Niveau de dangerosité" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+        <TextField fx:id="quantiteField" promptText="Quantité" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <ComboBox fx:id="fournisseurComboBox" promptText="Fournisseur" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <Button text="Ajouter Produit" onAction="#addProduit" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+    </GridPane>
+    <TableView fx:id="produitTable" VBox.vgrow="ALWAYS">
         <columns>
             <TableColumn text="Libellé" fx:id="libelleColumn"/>
             <TableColumn text="Description" fx:id="descriptionColumn"/>

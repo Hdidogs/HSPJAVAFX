@@ -2,26 +2,36 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<VBox spacing="10" xmlns:fx="http://javafx.com/fxml" fx:controller="com.hospital.controller.PatientManagementController">
-    <HBox spacing="10">
-        <TextField fx:id="nomField" promptText="Nom"/>
-        <TextField fx:id="prenomField" promptText="Prénom"/>
-        <TextField fx:id="numSecuField" promptText="Numéro de sécurité sociale"/>
-        <TextField fx:id="mailField" promptText="Email"/>
-        <TextField fx:id="telField" promptText="Téléphone"/>
-        <TextField fx:id="rueField" promptText="Rue"/>
-        <TextField fx:id="villeField" promptText="Ville"/>
-        <TextField fx:id="cpField" promptText="Code postal"/>
-        <Button text="Ajouter Patient" onAction="#addPatient"/>
-    </HBox>
-    <TableView fx:id="patientTable">
+<VBox spacing="20" xmlns:fx="http://javafx.com/fxml" fx:controller="com.hospital.controller.PatientManagementController"
+      stylesheets="@../styles/global.css">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+    <Label text="Gestion des Patients" styleClass="title"/>
+    <GridPane hgap="10" vgap="10">
+        <TextField fx:id="nomField" promptText="Nom" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="prenomField" promptText="Prénom" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+        <TextField fx:id="numSecuField" promptText="Numéro de sécurité sociale" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+        <TextField fx:id="mailField" promptText="Email" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextField fx:id="telField" promptText="Téléphone" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <TextField fx:id="rueField" promptText="Rue" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+        <TextField fx:id="villeField" promptText="Ville" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <TextField fx:id="cpField" promptText="Code postal" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        <Button text="Ajouter Patient" onAction="#addPatient" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+    </GridPane>
+    <TableView fx:id="patientTable" VBox.vgrow="ALWAYS">
         <columns>
+            <TableColumn text="ID" fx:id="idColumn"/>
             <TableColumn text="Nom" fx:id="nomColumn"/>
             <TableColumn text="Prénom" fx:id="prenomColumn"/>
             <TableColumn text="Numéro de sécurité sociale" fx:id="numSecuColumn"/>
             <TableColumn text="Email" fx:id="mailColumn"/>
             <TableColumn text="Téléphone" fx:id="telColumn"/>
+            <TableColumn text="Rue" fx:id="rueColumn"/>
+            <TableColumn text="Ville" fx:id="villeColumn"/>
+            <TableColumn text="Code postal" fx:id="cpColumn"/>
         </columns>
     </TableView>
 </VBox>

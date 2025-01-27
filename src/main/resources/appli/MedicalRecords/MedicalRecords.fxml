@@ -2,16 +2,22 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<VBox spacing="10" xmlns:fx="http://javafx.com/fxml" fx:controller="com.hospital.controller.MedicalRecordsController">
-    <HBox spacing="10">
-        <ComboBox fx:id="patientComboBox" promptText="Sélectionner un patient"/>
-        <DatePicker fx:id="dateArriveeField" promptText="Date d'arrivée"/>
-        <TextField fx:id="symptomesField" promptText="Symptômes"/>
-        <ComboBox fx:id="niveauGraviteComboBox" promptText="Niveau de gravité"/>
-        <Button text="Ajouter Dossier" onAction="#addDossier"/>
-    </HBox>
-    <TableView fx:id="dossierTable">
+<VBox spacing="20" xmlns:fx="http://javafx.com/fxml" fx:controller="com.hospital.controller.MedicalRecordsController"
+      stylesheets="@../styles/global.css">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+    <Label text="Dossiers Médicaux" styleClass="title"/>
+    <GridPane hgap="10" vgap="10">
+        <ComboBox fx:id="patientComboBox" promptText="Sélectionner un patient" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <DatePicker fx:id="dateArriveeField" promptText="Date d'arrivée" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+        <TextField fx:id="symptomesField" promptText="Symptômes" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+        <ComboBox fx:id="niveauGraviteComboBox" promptText="Niveau de gravité" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <Button text="Ajouter Dossier" onAction="#addDossier" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    </GridPane>
+    <TableView fx:id="dossierTable" VBox.vgrow="ALWAYS">
         <columns>
             <TableColumn text="Patient" fx:id="patientColumn"/>
             <TableColumn text="Date d'arrivée" fx:id="dateArriveeColumn"/>

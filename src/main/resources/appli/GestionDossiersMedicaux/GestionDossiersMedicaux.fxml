@@ -2,19 +2,51 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.hospital.controller.GestionDossiersMedicauxController">
-    <TableView fx:id="dossiersTable">
-        <columns>
-            <TableColumn text="Patient" fx:id="patientColumn"/>
-            <TableColumn text="Date d'arrivée" fx:id="dateArriveeColumn"/>
-            <TableColumn text="Symptômes" fx:id="symptomesColumn"/>
-            <TableColumn text="Niveau de gravité" fx:id="niveauGraviteColumn"/>
-        </columns>
-    </TableView>
-    <HBox spacing="10">
-        <Button text="Voir détails" onAction="#voirDetails"/>
-        <Button text="Hospitaliser" onAction="#hospitaliser"/>
-    </HBox>
-</VBox>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.hospital.controller.GestionDossiersMedicauxController"
+            stylesheets="@../styles/global.css">
+    <top>
+        <HBox alignment="CENTER" styleClass="header">
+            <Label text="Gestion des Dossiers Médicaux" styleClass="page-title"/>
+        </HBox>
+    </top>
+    <center>
+        <VBox spacing="20" styleClass="content-area">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <TextField fx:id="searchField" promptText="Rechercher un dossier" HBox.hgrow="ALWAYS"/>
+                <Button text="Rechercher" onAction="#handleSearch" styleClass="search-button"/>
+            </HBox>
+            <TableView fx:id="dossierTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn text="Patient" fx:id="patientColumn"/>
+                    <TableColumn text="Date d'arrivée" fx:id="dateArriveeColumn"/>
+                    <TableColumn text="Symptômes" fx:id="symptomesColumn"/>
+                    <TableColumn text="Niveau de gravité" fx:id="niveauGraviteColumn"/>
+                    <TableColumn text="État" fx:id="etatColumn"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+    <right>
+        <VBox spacing="10" styleClass="side-panel">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="Ajouter/Modifier un dossier" styleClass="section-title"/>
+            <ComboBox fx:id="patientComboBox" promptText="Sélectionner un patient" styleClass="input-field"/>
+            <DatePicker fx:id="dateArriveeField" promptText="Date d'arrivée" styleClass="input-field"/>
+            <TextArea fx:id="symptomesField" promptText="Symptômes" styleClass="input-field"/>
+            <ComboBox fx:id="niveauGraviteComboBox" promptText="Niveau de gravité" styleClass="input-field"/>
+            <ComboBox fx:id="etatComboBox" promptText="État" styleClass="input-field"/>
+            <HBox spacing="10">
+                <Button text="Ajouter" onAction="#handleAdd" styleClass="primary-button"/>
+                <Button text="Modifier" onAction="#handleUpdate" styleClass="secondary-button"/>
+            </HBox>
+        </VBox>
+    </right>
+</BorderPane>
 

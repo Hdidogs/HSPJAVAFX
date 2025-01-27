@@ -2,11 +2,34 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.hospital.controller.LoginController">
-    <TextField fx:id="emailField" promptText="Email"/>
-    <PasswordField fx:id="passwordField" promptText="Mot de passe"/>
-    <Button text="Se connecter" onAction="#handleLogin"/>
-</VBox>
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.hospital.controller.LoginController"
+           stylesheets="@../styles/global.css">
+    <VBox alignment="CENTER" spacing="20.0" maxWidth="400" styleClass="form-container">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+        <Label text="Système de Gestion Hospitalière" styleClass="main-title"/>
+        <TabPane>
+            <Tab text="Connexion">
+                <VBox spacing="15">
+                    <TextField fx:id="loginEmailField" promptText="Email" styleClass="input-field"/>
+                    <PasswordField fx:id="loginPasswordField" promptText="Mot de passe" styleClass="input-field"/>
+                    <Button text="Se connecter" onAction="#handleLogin" styleClass="primary-button"/>
+                </VBox>
+            </Tab>
+            <Tab text="Inscription">
+                <VBox spacing="15">
+                    <TextField fx:id="registerNameField" promptText="Nom" styleClass="input-field"/>
+                    <TextField fx:id="registerEmailField" promptText="Email" styleClass="input-field"/>
+                    <PasswordField fx:id="registerPasswordField" promptText="Mot de passe" styleClass="input-field"/>
+                    <PasswordField fx:id="confirmPasswordField" promptText="Confirmer le mot de passe" styleClass="input-field"/>
+                    <ComboBox fx:id="roleComboBox" promptText="Rôle" styleClass="input-field"/>
+                    <Button text="S'inscrire" onAction="#handleRegister" styleClass="secondary-button"/>
+                </VBox>
+            </Tab>
+        </TabPane>
+    </VBox>
+</StackPane>
 

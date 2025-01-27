@@ -2,20 +2,53 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.hospital.controller.GestionPatientsController">
-    <HBox spacing="10">
-        <TextField fx:id="nomField" promptText="Nom"/>
-        <TextField fx:id="prenomField" promptText="Prénom"/>
-        <TextField fx:id="numeroSecuriteSocialeField" promptText="Numéro de sécurité sociale"/>
-        <Button text="Ajouter Patient" onAction="#ajouterPatient"/>
-    </HBox>
-    <TableView fx:id="patientsTable">
-        <columns>
-            <TableColumn text="Nom" fx:id="nomColumn"/>
-            <TableColumn text="Prénom" fx:id="prenomColumn"/>
-            <TableColumn text="Numéro de sécurité sociale" fx:id="numeroSecuriteSocialeColumn"/>
-        </columns>
-    </TableView>
-</VBox>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.hospital.controller.GestionPatientsController"
+            stylesheets="@../styles/global.css">
+    <top>
+        <HBox alignment="CENTER" styleClass="header">
+            <Label text="Gestion des Patients" styleClass="page-title"/>
+        </HBox>
+    </top>
+    <center>
+        <VBox spacing="20" styleClass="content-area">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <TextField fx:id="searchField" promptText="Rechercher un patient" HBox.hgrow="ALWAYS"/>
+                <Button text="Rechercher" onAction="#handleSearch" styleClass="search-button"/>
+            </HBox>
+            <TableView fx:id="patientTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn text="Nom" fx:id="nomColumn"/>
+                    <TableColumn text="Prénom" fx:id="prenomColumn"/>
+                    <TableColumn text="Numéro de sécurité sociale" fx:id="numSecuColumn"/>
+                    <TableColumn text="Email" fx:id="mailColumn"/>
+                    <TableColumn text="Téléphone" fx:id="telColumn"/>
+                    <TableColumn text="Adresse" fx:id="adresseColumn"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+    <right>
+        <VBox spacing="10" styleClass="side-panel">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="Ajouter/Modifier un patient" styleClass="section-title"/>
+            <TextField fx:id="nomField" promptText="Nom" styleClass="input-field"/>
+            <TextField fx:id="prenomField" promptText="Prénom" styleClass="input-field"/>
+            <TextField fx:id="numSecuField" promptText="Numéro de sécurité sociale" styleClass="input-field"/>
+            <TextField fx:id="mailField" promptText="Email" styleClass="input-field"/>
+            <TextField fx:id="telField" promptText="Téléphone" styleClass="input-field"/>
+            <TextField fx:id="adresseField" promptText="Adresse" styleClass="input-field"/>
+            <HBox spacing="10">
+                <Button text="Ajouter" onAction="#handleAdd" styleClass="primary-button"/>
+                <Button text="Modifier" onAction="#handleUpdate" styleClass="secondary-button"/>
+            </HBox>
+        </VBox>
+    </right>
+</BorderPane>
 
