@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.hospital.controller.GestionStocksController">
+    <HBox spacing="10">
+        <TextField fx:id="libelleField" promptText="Libellé"/>
+        <TextField fx:id="quantiteField" promptText="Quantité"/>
+        <Button text="Ajouter Produit" onAction="#ajouterProduit"/>
+    </HBox>
+    <TableView fx:id="produitsTable">
+        <columns>
+            <TableColumn text="Libellé" fx:id="libelleColumn"/>
+            <TableColumn text="Quantité" fx:id="quantiteColumn"/>
+            <TableColumn text="Niveau de dangerosité" fx:id="dangerositeColumn"/>
+        </columns>
+    </TableView>
+    <HBox spacing="10">
+        <Button text="Valider demande" onAction="#validerDemande"/>
+        <Button text="Refuser demande" onAction="#refuserDemande"/>
+    </HBox>
+</VBox>
+

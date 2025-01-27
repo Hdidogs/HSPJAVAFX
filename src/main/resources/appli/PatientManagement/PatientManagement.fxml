@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml" fx:controller="com.hospital.controller.PatientManagementController">
+    <HBox spacing="10">
+        <TextField fx:id="nomField" promptText="Nom"/>
+        <TextField fx:id="prenomField" promptText="Prénom"/>
+        <TextField fx:id="numSecuField" promptText="Numéro de sécurité sociale"/>
+        <TextField fx:id="mailField" promptText="Email"/>
+        <TextField fx:id="telField" promptText="Téléphone"/>
+        <TextField fx:id="rueField" promptText="Rue"/>
+        <TextField fx:id="villeField" promptText="Ville"/>
+        <TextField fx:id="cpField" promptText="Code postal"/>
+        <Button text="Ajouter Patient" onAction="#addPatient"/>
+    </HBox>
+    <TableView fx:id="patientTable">
+        <columns>
+            <TableColumn text="Nom" fx:id="nomColumn"/>
+            <TableColumn text="Prénom" fx:id="prenomColumn"/>
+            <TableColumn text="Numéro de sécurité sociale" fx:id="numSecuColumn"/>
+            <TableColumn text="Email" fx:id="mailColumn"/>
+            <TableColumn text="Téléphone" fx:id="telColumn"/>
+        </columns>
+    </TableView>
+</VBox>
+
