@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class Database {
     private String serveur = "localhost";
-    private String nomDeLaBase = "todolist";
+    private String nomDeLaBase = "hspjava";
     private String utilisateur = "root";
     private String motDePasse = "";
 

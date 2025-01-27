@@ -17,7 +17,7 @@ public class EtatsRepository {
         Database db = new Database();
         Connection cnx = db.getConnection();
 
-        PreparedStatement req = cnx.prepareStatement("SELECT * FROM etats");
+        PreparedStatement req = cnx.prepareStatement("SELECT * FROM etat");
         ResultSet rs = req.executeQuery();
 
         while (rs.next()) {
