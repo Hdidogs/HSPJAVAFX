@@ -17,6 +17,15 @@ public class Produits {
         this.refFournisseurs = refFournisseurs;
     }
 
+    public Produits(String libelle, String description, int niveauDangerosite, int quantite, int refFournisseurs) {
+        this.id = id;
+        this.libelle = libelle;
+        this.description = description;
+        this.niveauDangerosite = niveauDangerosite;
+        this.quantite = quantite;
+        this.refFournisseurs = refFournisseurs;
+    }
+
     public int getId() {
         return id;
     }

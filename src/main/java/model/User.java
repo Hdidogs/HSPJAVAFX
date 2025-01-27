@@ -21,6 +21,15 @@ public class User {
         this.dateCreation = dateCreation;
     }
 
+    public User(String nom, String prenom, String mail, String motDePasse, int refRole, Date dateCreation) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.mail = mail;
+        this.motDePasse = motDePasse;
+        this.refRole = refRole;
+        this.dateCreation = dateCreation;
+    }
+
     public int getId() {
         return id;
     }

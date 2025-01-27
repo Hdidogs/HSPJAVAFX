@@ -9,6 +9,10 @@ public class Role {
         this.libelle = libelle;
     }
 
+    public Role(String libelle) {
+        this.libelle = libelle;
+    }
+
     public int getId() {
         return id;
     }

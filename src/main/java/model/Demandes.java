@@ -21,6 +21,15 @@ public class Demandes {
         this.refGestionnaire = refGestionnaire;
     }
 
+    public Demandes(int refMedecin, int refProduits, int quantite, int refEtat, Date date, Integer refGestionnaire) {
+        this.refMedecin = refMedecin;
+        this.refProduits = refProduits;
+        this.quantite = quantite;
+        this.refEtat = refEtat;
+        this.date = date;
+        this.refGestionnaire = refGestionnaire;
+    }
+
     public int getId() {
         return id;
     }

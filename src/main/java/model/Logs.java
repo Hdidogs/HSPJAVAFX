@@ -15,6 +15,12 @@ public class Logs {
         this.date = date;
     }
 
+    public Logs(int refUser, int refAction, Date date) {
+        this.refUser = refUser;
+        this.refAction = refAction;
+        this.date = date;
+    }
+
     public int getId() {
         return id;
     }

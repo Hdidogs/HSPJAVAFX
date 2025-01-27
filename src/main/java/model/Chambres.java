@@ -19,6 +19,15 @@ public class Chambres {
         this.refDossiers = refDossiers;
     }
 
+    public Chambres(String num, boolean dispo, Date dateDebut, Date dateFin, int refDossiers) {
+        this.id = id;
+        this.num = num;
+        this.dispo = dispo;
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
+        this.refDossiers = refDossiers;
+    }
+
     public int getId() {
         return id;
     }

@@ -9,6 +9,10 @@ public class Etats {
         this.libelle = libelle;
     }
 
+    public Etats(String libelle) {
+        this.libelle = libelle;
+    }
+
     public int getId() {
         return id;
     }

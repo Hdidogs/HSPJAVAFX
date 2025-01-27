@@ -13,6 +13,12 @@ public class Fournisseurs {
         this.prixUnitaire = prixUnitaire;
     }
 
+    public Fournisseurs(String nom, String contact, float prixUnitaire) {
+        this.nom = nom;
+        this.contact = contact;
+        this.prixUnitaire = prixUnitaire;
+    }
+
     public int getId() {
         return id;
     }

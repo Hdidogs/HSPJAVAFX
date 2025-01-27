@@ -9,6 +9,11 @@ public class Actions {
         this.libelle = libelle;
     }
 
+    public Actions(String libelle) {
+        this.id = id;
+        this.libelle = libelle;
+    }
+
     public int getId() {
         return id;
     }

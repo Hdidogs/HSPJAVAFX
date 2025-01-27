@@ -23,6 +23,18 @@ public class Patients {
         this.cp = cp;
     }
 
+    public Patients(String nom, String prenom, String numSecu, String mail, String tel, String rue, String ville, int cp) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.numSecu = numSecu;
+        this.mail = mail;
+        this.tel = tel;
+        this.rue = rue;
+        this.ville = ville;
+        this.cp = cp;
+    }
+
     public int getId() {
         return id;
     }

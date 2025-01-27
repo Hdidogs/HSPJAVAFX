@@ -23,6 +23,16 @@ public class Dossiers {
         this.dateCloture = dateCloture;
     }
 
+    public Dossiers(int refPatients, int refUser, Date dateArrivee, String symptomes, int niveauGravite, int refEtat, Date dateCloture) {
+        this.refPatients = refPatients;
+        this.refUser = refUser;
+        this.dateArrivee = dateArrivee;
+        this.symptomes = symptomes;
+        this.niveauGravite = niveauGravite;
+        this.refEtat = refEtat;
+        this.dateCloture = dateCloture;
+    }
+
     public int getId() {
         return id;
     }
