@@ -80,4 +80,60 @@ public class UserRepository {
 
         return users;
     }
+
+    public static List<String> getAllRoles() throws SQLException {
+        List<String> roles = new ArrayList<>();
+        Database db = new Database();
+        Connection cnx = db.getConnection();
+
+        PreparedStatement req = cnx.prepareStatement("SELECT libelle FROM role");
+        ResultSet rs = req.executeQuery();
+
+        while (rs.next()) {
+            roles.add(rs.getString("libelle"));
+        }
+
+        return roles;
+    }
+
+    public static User login(String email, String password) throws SQLException {
+        Database db = new Database();
+        Connection cnx = db.getConnection();
+
+        String sql = "SELECT * FROM user WHERE mail = ? AND mdp = ?";
+        PreparedStatement req = cnx.prepareStatement(sql);
+        req.setString(1, email);
+        req.setString(2, password);
+
+        ResultSet rs = req.executeQuery();
+
+        if (rs.next()) {
+            return new User(
+                    rs.getInt("id_user"),
+                    rs.getString("nom"),
+                    rs.getString("prenom"),
+                    rs.getString("mail"),
+                    rs.getString("mdp"),
+                    rs.getInt("ref_role"),
+                    rs.getDate("date_creation")
+            );
+        }
+
+        return null;
+    }
+
+    public static boolean register(User newUser) throws SQLException {
+        Database db = new Database();
+        Connection cnx = db.getConnection();
+
+        String sql = "INSERT INTO user (nom, prenom, mail, mdp, ref_role, date_creation) VALUES (?, ?, ?, ?, ?, NOW())";
+        PreparedStatement req = cnx.prepareStatement(sql);
+        req.setString(1, newUser.getNom());
+        req.setString(2, newUser.getPrenom());
+        req.setString(3, newUser.getMail());
+        req.setString(4, newUser.getMotDePasse());
+        req.setInt(5, newUser.getRefRole());
+
+        return req.executeUpdate() == 1;
+    }
 }

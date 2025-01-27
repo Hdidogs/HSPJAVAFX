@@ -91,4 +91,67 @@ public class DossiersRepository {
 
         return dossiers;
     }
+
+    public static List<Dossiers> searchDossiers(String searchQuery) throws SQLException {
+        List<Dossiers> dossiers = new ArrayList<>();
+        Database db = new Database();
+        Connection cnx = db.getConnection();
+
+        // Requête SQL pour rechercher des dossiers
+        String sql = "SELECT * FROM dossiers " +
+                "WHERE ref_patients IN (SELECT id_patients FROM patients WHERE nom LIKE ? OR prenom LIKE ?) " +
+                "OR symptomes LIKE ? " +
+                "OR niveau_gravite LIKE ? " +
+                "OR ref_etat IN (SELECT id_etat FROM etat WHERE libelle LIKE ?)";
+
+        PreparedStatement req = cnx.prepareStatement(sql);
+        String likeQuery = "%" + searchQuery + "%";
+
+        // Remplissage des paramètres pour la requête
+        req.setString(1, likeQuery); // Recherche par nom du patient
+        req.setString(2, likeQuery); // Recherche par prénom du patient
+        req.setString(3, likeQuery); // Recherche par symptômes
+        req.setString(4, likeQuery); // Recherche par niveau de gravité
+        req.setString(5, likeQuery); // Recherche par état (libellé)
+
+        ResultSet rs = req.executeQuery();
+
+        // Parcours des résultats et ajout à la liste
+        while (rs.next()) {
+            dossiers.add(new Dossiers(
+                    rs.getInt("id_dossiers"),
+                    rs.getInt("ref_patients"),
+                    rs.getInt("ref_user"),
+                    rs.getDate("date_arrivee"),
+                    rs.getString("symptomes"),
+                    rs.getInt("niveau_gravite"),
+                    rs.getInt("ref_etat"),
+                    rs.getDate("date_cloture")
+            ));
+        }
+        return dossiers;
+    }
+
+    public static Etats getEtatById(int refEtat) throws SQLException {
+        Database db = new Database();
+        Connection cnx = db.getConnection();
+
+        // Requête SQL pour récupérer l'état par ID
+        String sql = "SELECT * FROM etat WHERE id_etat = ?";
+        PreparedStatement req = cnx.prepareStatement(sql);
+        req.setInt(1, refEtat);
+
+        ResultSet rs = req.executeQuery();
+
+        // Si un état est trouvé, le retourner
+        if (rs.next()) {
+            return new Etats(
+                    rs.getInt("id_etat"),
+                    rs.getString("libelle")
+            );
+        }
+
+        // Retourner null si aucun état n'est trouvé
+        return null;
+    }
 }

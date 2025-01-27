@@ -5,8 +5,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.hospital.controller.DashboardController"
-            stylesheets="@../styles/global.css">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="appli.dashboard.DashboardController"
+            stylesheets="@/styles/global.css">
     <top>
         <HBox alignment="CENTER" styleClass="header">
             <Label text="Tableau de Bord" styleClass="page-title"/>

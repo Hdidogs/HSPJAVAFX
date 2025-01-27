@@ -4,8 +4,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.hospital.controller.LoginController"
-           stylesheets="@../styles/global.css">
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="appli.user.LoginController"
+           stylesheets="@/styles/global.css">
     <VBox alignment="CENTER" spacing="20.0" maxWidth="400" styleClass="form-container">
         <padding>
             <Insets top="20" right="20" bottom="20" left="20"/>

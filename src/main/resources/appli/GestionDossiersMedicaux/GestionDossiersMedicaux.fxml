@@ -4,8 +4,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.hospital.controller.GestionDossiersMedicauxController"
-            stylesheets="@../styles/global.css">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="appli.dossierMedic.DossiersMedicauxController"
+            stylesheets="@/styles/global.css">
     <top>
         <HBox alignment="CENTER" styleClass="header">
             <Label text="Gestion des Dossiers Médicaux" styleClass="page-title"/>

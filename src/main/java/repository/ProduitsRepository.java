@@ -79,4 +79,36 @@ public class ProduitsRepository {
 
         return produits;
     }
+
+    public static List<Produits> searchProduits(String searchQuery) throws SQLException {
+        List<Produits> produits = new ArrayList<>();
+        Database db = new Database();
+        Connection cnx = db.getConnection();
+
+        String sql = "SELECT p.*, f.nom AS fournisseur_nom " +
+                "FROM produits p " +
+                "LEFT JOIN fournisseurs f ON p.ref_fournisseurs = f.id_fournisseurs " +
+                "WHERE p.libelle LIKE ? OR p.description LIKE ? OR f.nom LIKE ?";
+        PreparedStatement req = cnx.prepareStatement(sql);
+        String likeQuery = "%" + searchQuery + "%";
+
+        req.setString(1, likeQuery); // Recherche par libellé
+        req.setString(2, likeQuery); // Recherche par description
+        req.setString(3, likeQuery); // Recherche par nom du fournisseur
+
+        ResultSet rs = req.executeQuery();
+
+        while (rs.next()) {
+            produits.add(new Produits(
+                    rs.getInt("id_produits"),
+                    rs.getString("libelle"),
+                    rs.getString("description"),
+                    rs.getInt("niveau_dangerosite"),
+                    rs.getInt("qtn"),
+                    rs.getInt("ref_fournisseurs")
+            ));
+        }
+
+        return produits;
+    }
 }

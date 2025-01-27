@@ -73,4 +73,26 @@ public class FournisseursRepository {
 
         return fournisseurs;
     }
+
+    public static Fournisseurs getFournisseurById(int refFournisseurs) throws SQLException {
+        Database db = new Database();
+        Connection cnx = db.getConnection();
+
+        String sql = "SELECT * FROM fournisseurs WHERE id_fournisseurs = ?";
+        PreparedStatement req = cnx.prepareStatement(sql);
+        req.setInt(1, refFournisseurs);
+
+        ResultSet rs = req.executeQuery();
+
+        if (rs.next()) {
+            return new Fournisseurs(
+                    rs.getInt("id_fournisseurs"),
+                    rs.getString("nom"),
+                    rs.getString("contact"),
+                    rs.getFloat("prix_uni")
+            );
+        }
+
+        return null;
+    }
 }

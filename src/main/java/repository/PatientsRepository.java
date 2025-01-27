@@ -88,5 +88,67 @@ public class PatientsRepository {
 
         return patients;
     }
+
+    public static Patients getPatientById(int refPatients) throws SQLException {
+        Database db = new Database();
+        Connection cnx = db.getConnection();
+
+        String sql = "SELECT * FROM patients WHERE id_patients = ?";
+        PreparedStatement req = cnx.prepareStatement(sql);
+        req.setInt(1, refPatients);
+
+        ResultSet rs = req.executeQuery();
+
+        if (rs.next()) {
+            return new Patients(
+                    rs.getInt("id_patients"),
+                    rs.getString("nom"),
+                    rs.getString("prenom"),
+                    rs.getString("num_secu"),
+                    rs.getString("mail"),
+                    rs.getString("tel"),
+                    rs.getString("rue"),
+                    rs.getString("ville"),
+                    rs.getInt("cp")
+            );
+        }
+
+        return null;
+    }
+
+    public static List<Patients> searchPatients(String searchQuery) throws SQLException {
+        List<Patients> patients = new ArrayList<>();
+        Database db = new Database();
+        Connection cnx = db.getConnection();
+
+        String sql = "SELECT * FROM patients " +
+                "WHERE nom LIKE ? OR prenom LIKE ? OR num_secu LIKE ? OR mail LIKE ? OR tel LIKE ? OR rue LIKE ?";
+        PreparedStatement req = cnx.prepareStatement(sql);
+        String likeQuery = "%" + searchQuery + "%";
+
+        req.setString(1, likeQuery);
+        req.setString(2, likeQuery);
+        req.setString(3, likeQuery);
+        req.setString(4, likeQuery);
+        req.setString(5, likeQuery);
+        req.setString(6, likeQuery);
+        ResultSet rs = req.executeQuery();
+
+        while (rs.next()) {
+            patients.add(new Patients(
+                    rs.getInt("id_patients"),
+                    rs.getString("nom"),
+                    rs.getString("prenom"),
+                    rs.getString("num_secu"),
+                    rs.getString("mail"),
+                    rs.getString("tel"),
+                    rs.getString("rue"),
+                    rs.getString("ville"),
+                    rs.getInt("cp")
+            ));
+        }
+
+        return patients;
+    }
 }
 
