@@ -68,21 +68,21 @@ public class DashboardController {
 
     @FXML
     private void showPatientManagement() throws IOException {
-        StartApplication.changeScene("patients/patientmanagement.fxml");
+        StartApplication.changeScene("GestionPatients/GestionPatients.fxml");
     }
 
     @FXML
     private void showMedicalRecords() throws IOException {
-        StartApplication.changeScene("dossiers/medicalrecords.fxml");
+        StartApplication.changeScene("GestionDossiersMedicaux/GestionDossiersMedicaux.fxml");
     }
 
     @FXML
     private void showStockManagement() throws IOException {
-        StartApplication.changeScene("stocks/stockmanagement.fxml");
+        StartApplication.changeScene("GestionStocks/GestionStocks.fxml");
     }
 
     @FXML
     private void handleLogout() throws IOException {
-        StartApplication.changeScene("auth/login.fxml");
+        StartApplication.changeScene("Login/Login.fxml");
     }
 }

@@ -6,7 +6,7 @@
 <?import javafx.scene.chart.*?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="appli.dashboard.DashboardController"
-            stylesheets="@/styles/global.css">
+            stylesheets="/styles/global.css">
     <top>
         <HBox alignment="CENTER" styleClass="header">
             <Label text="Tableau de Bord" styleClass="page-title"/>
