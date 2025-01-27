@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserRepository {
+    public static boolean addUser(User user) throws SQLException {
+        return addUser(user.getNom(), user.getPrenom(), user.getMail(), user.getMotDePasse(), user.getRefRole());
+    }
+
     public static boolean addUser(String nom, String prenom, String mail, String motDePasse, int refRole) throws SQLException {
         Database db = new Database();
         Connection cnx = db.getConnection();
@@ -33,6 +37,10 @@ public class UserRepository {
         req.setInt(1, idUser);
 
         return req.executeUpdate() == 1;
+    }
+
+    public static boolean updateUser(User user) throws SQLException {
+        return updateUser(user.getId(), user.getNom(), user.getPrenom(), user.getMail(), user.getMotDePasse(), user.getRefRole());
     }
 
     public static boolean updateUser(int idUser, String nom, String prenom, String mail, String motDePasse, int refRole) throws SQLException {

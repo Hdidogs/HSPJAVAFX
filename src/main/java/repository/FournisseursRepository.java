@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FournisseursRepository {
+    public static boolean addFournisseur(Fournisseurs fournisseur) throws SQLException {
+        return addFournisseur(fournisseur.getNom(), fournisseur.getContact(), fournisseur.getPrixUnitaire());
+    }
+
     public static boolean addFournisseur(String nom, String contact, float prixUnitaire) throws SQLException {
         Database db = new Database();
         Connection cnx = db.getConnection();
@@ -31,6 +35,10 @@ public class FournisseursRepository {
         req.setInt(1, idFournisseur);
 
         return req.executeUpdate() == 1;
+    }
+
+    public static boolean updateFournisseur(Fournisseurs fournisseur) throws SQLException {
+        return updateFournisseur(fournisseur.getId(), fournisseur.getNom(), fournisseur.getContact(), fournisseur.getPrixUnitaire());
     }
 
     public static boolean updateFournisseur(int idFournisseur, String nom, String contact, float prixUnitaire) throws SQLException {

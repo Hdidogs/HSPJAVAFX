@@ -12,6 +12,10 @@ import java.sql.Date;
 import java.util.List;
 
 public class ChambresRepository {
+    public static boolean addChambre(Chambres chambres) throws SQLException {
+        return addChambre(chambres.getNum(), chambres.isDispo(), chambres.getDateDebut(), chambres.getDateFin(), chambres.getRefDossiers());
+    }
+
     public static boolean addChambre(String num, boolean dispo, Date dateDebut, Date dateFin, int refDossiers) throws SQLException {
         Database db = new Database();
         Connection cnx = db.getConnection();
@@ -34,6 +38,10 @@ public class ChambresRepository {
         req.setInt(1, idChambre);
 
         return req.executeUpdate() == 1;
+    }
+
+    public static boolean updateChambre(Chambres chambres) throws SQLException {
+        return updateChambre(chambres.getId(), chambres.getNum(), chambres.isDispo(), chambres.getDateDebut(), chambres.getDateFin(), chambres.getRefDossiers());
     }
 
     public static boolean updateChambre(int idChambre, String num, boolean dispo, Date dateDebut, Date dateFin, int refDossiers) throws SQLException {

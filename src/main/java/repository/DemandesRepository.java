@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DemandesRepository {
+    public static boolean addDemande(Demandes demandes) throws SQLException {
+        return addDemande(demandes.getRefMedecin(), demandes.getRefProduits(), demandes.getQuantite(), demandes.getRefEtat(), demandes.getDate(), demandes.getRefGestionnaire());
+    }
+
     public static boolean addDemande(int refMedecin, int refProduits, int quantite, int refEtat, Date date, Integer refGestionnaire) throws SQLException {
         Database db = new Database();
         Connection cnx = db.getConnection();
@@ -35,6 +39,10 @@ public class DemandesRepository {
         req.setInt(1, idDemande);
 
         return req.executeUpdate() == 1;
+    }
+
+    public static boolean updateDemande(Demandes demandes) throws SQLException {
+        return updateDemande(demandes.getId() ,demandes.getRefMedecin(), demandes.getRefProduits(), demandes.getQuantite(), demandes.getRefEtat(), demandes.getDate(), demandes.getRefGestionnaire());
     }
 
     public static boolean updateDemande(int idDemande, int refMedecin, int refProduits, int quantite, int refEtat, Date date, Integer refGestionnaire) throws SQLException {
