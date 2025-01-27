@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProduitsRepository {
+    public static boolean addProduit(Produits produits) throws SQLException {
+        return addProduit(produits.getLibelle(), produits.getDescription(), produits.getNiveauDangerosite(), produits.getQuantite(), produits.getRefFournisseurs());
+    }
+
     public static boolean addProduit(String libelle, String description, int niveauDangerosite, int quantite, int refFournisseurs) throws SQLException {
         Database db = new Database();
         Connection cnx = db.getConnection();
@@ -33,6 +37,10 @@ public class ProduitsRepository {
         req.setInt(1, idProduit);
 
         return req.executeUpdate() == 1;
+    }
+
+    public static boolean updateProduit(Produits produits) throws SQLException {
+        return updateProduit(produits.getId(), produits.getLibelle(), produits.getDescription(), produits.getNiveauDangerosite(), produits.getQuantite(), produits.getRefFournisseurs());
     }
 
     public static boolean updateProduit(int idProduit, String libelle, String description, int niveauDangerosite, int quantite, int refFournisseurs) throws SQLException {

@@ -9,6 +9,10 @@ import java.util.List;
 
 // Repository for Dossiers
 public class DossiersRepository {
+    public static boolean addDossiers(Dossiers dossier) throws SQLException {
+        return addDossiers(dossier.getRefPatients(), dossier.getRefUser(), dossier.getDateArrivee(), dossier.getSymptomes(), dossier.getNiveauGravite(), dossier.getRefEtat(), dossier.getDateCloture());
+    }
+
     public static boolean addDossiers(int refPatients, int refUser, Date dateArrivee, String symptomes, int niveauGravite, int refEtat, Date dateCloture) throws SQLException {
         Database db = new Database();
         Connection cnx = db.getConnection();
@@ -37,6 +41,10 @@ public class DossiersRepository {
         req.setInt(1, idDossiers);
 
         return req.executeUpdate() == 1;
+    }
+
+    public static boolean updateDossiers(Dossiers dossier) throws SQLException {
+        return updateDossiers(dossier.getId(), dossier.getRefPatients(), dossier.getRefUser(), dossier.getDateArrivee(), dossier.getSymptomes(), dossier.getNiveauGravite(), dossier.getRefEtat(), dossier.getDateCloture());
     }
 
     public static boolean updateDossiers(int idDossiers, int refPatients, int refUser, Date dateArrivee, String symptomes, int niveauGravite, int refEtat, Date dateCloture) throws SQLException {

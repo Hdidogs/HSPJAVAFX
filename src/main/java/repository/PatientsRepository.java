@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PatientsRepository {
+    public static boolean addPatient(Patients patients) throws SQLException {
+        return addPatient(patients.getNom(), patients.getPrenom(), patients.getNumSecu(), patients.getMail(), patients.getTel(), patients.getRue(), patients.getVille(), patients.getCp());
+    }
+
     public static boolean addPatient(String nom, String prenom, String numSecu, String mail, String tel, String rue, String ville, int cp) throws SQLException {
         Database db = new Database();
         Connection cnx = db.getConnection();
@@ -36,6 +40,10 @@ public class PatientsRepository {
         req.setInt(1, idPatient);
 
         return req.executeUpdate() == 1;
+    }
+
+    public static boolean updatePatient(Patients patients) throws SQLException {
+        return updatePatient(patients.getId(), patients.getNom(), patients.getPrenom(), patients.getNumSecu(), patients.getMail(), patients.getTel(), patients.getRue(), patients.getVille(), patients.getCp());
     }
 
     public static boolean updatePatient(int idPatient, String nom, String prenom, String numSecu, String mail, String tel, String rue, String ville, int cp) throws SQLException {
