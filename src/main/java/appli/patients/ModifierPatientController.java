@@ -36,7 +36,7 @@ public class ModifierPatientController {
     }
 
     @FXML
-    protected void onModifierPatientClick() throws SQLException {
+    protected void onModifierPatientClick() throws SQLException, IOException {
         if (nomField.getText().isEmpty() || prenomField.getText().isEmpty() || numSecuField.getText().isEmpty() ||
                 mailField.getText().isEmpty() || telField.getText().isEmpty() || rueField.getText().isEmpty() ||
                 villeField.getText().isEmpty() || cpField.getText().isEmpty()) {

@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 public class ModifierProduitController {
     @FXML
-    private TextField libelleField, descriptionField, dangerositeField, qtnField, fournisseurField;
+    private TextField libelleField, descriptionField, niveauDangerositeField, quantiteField, refFournisseursField;
 
     @FXML
     private Label erreurText;
@@ -27,26 +27,26 @@ public class ModifierProduitController {
     public void initialize() {
         libelleField.setText(produit.getLibelle());
         descriptionField.setText(produit.getDescription());
-        dangerositeField.setText(String.valueOf(produit.getDangerosite()));
-        qtnField.setText(String.valueOf(produit.getQuantite()));
-        fournisseurField.setText(String.valueOf(produit.getFournisseurId()));
+        niveauDangerositeField.setText(String.valueOf(produit.getNiveauDangerosite()));
+        quantiteField.setText(String.valueOf(produit.getQuantite()));
+        refFournisseursField.setText(String.valueOf(produit.getRefFournisseurs()));
     }
 
     @FXML
-    protected void onModifierProduitClick() throws SQLException {
+    protected void onModifierProduitClick() throws SQLException, IOException {
         if (libelleField.getText().isEmpty() || descriptionField.getText().isEmpty() ||
-                dangerositeField.getText().isEmpty() || qtnField.getText().isEmpty() ||
-                fournisseurField.getText().isEmpty()) {
+                niveauDangerositeField.getText().isEmpty() || quantiteField.getText().isEmpty() ||
+                refFournisseursField.getText().isEmpty()) {
             erreurText.setText("Tous les champs doivent être remplis !");
         } else {
             produit.setLibelle(libelleField.getText());
             produit.setDescription(descriptionField.getText());
-            produit.setDangerosite(Integer.parseInt(dangerositeField.getText()));
-            produit.setQuantite(Integer.parseInt(qtnField.getText()));
-            produit.setFournisseurId(Integer.parseInt(fournisseurField.getText()));
+            produit.setNiveauDangerosite(Integer.parseInt(niveauDangerositeField.getText()));
+            produit.setQuantite(Integer.parseInt(quantiteField.getText()));
+            produit.setRefFournisseurs(Integer.parseInt(refFournisseursField.getText()));
 
             if (ProduitsRepository.updateProduit(produit)) {
-                StartApplication.changeScene("stocks/stocksview.fxml");
+                StartApplication.changeScene("produits/produitsview.fxml");
             } else {
                 erreurText.setText("Erreur lors de la modification du produit.");
             }
@@ -55,7 +55,6 @@ public class ModifierProduitController {
 
     @FXML
     protected void onRetourClick() throws IOException {
-        StartApplication.changeScene("stocks/stocksview.fxml");
+        StartApplication.changeScene("produits/produitsview.fxml");
     }
 }
-

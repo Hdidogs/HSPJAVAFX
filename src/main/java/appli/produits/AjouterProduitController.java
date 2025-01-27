@@ -12,23 +12,28 @@ import java.sql.SQLException;
 
 public class AjouterProduitController {
     @FXML
-    private TextField libelleField, descriptionField, dangerositeField, qtnField, fournisseurField;
+    private TextField libelleField, descriptionField, niveauDangerositeField, quantiteField, refFournisseursField;
 
     @FXML
     private Label erreurText;
 
     @FXML
-    protected void onAjouterProduitClick() throws SQLException {
+    protected void onAjouterProduitClick() throws SQLException, IOException {
         if (libelleField.getText().isEmpty() || descriptionField.getText().isEmpty() ||
-                dangerositeField.getText().isEmpty() || qtnField.getText().isEmpty() || fournisseurField.getText().isEmpty()) {
+                niveauDangerositeField.getText().isEmpty() || quantiteField.getText().isEmpty() ||
+                refFournisseursField.getText().isEmpty()) {
             erreurText.setText("Tous les champs doivent être remplis !");
         } else {
-            Produits produit = new Produits(libelleField.getText(), descriptionField.getText(),
-                    Integer.parseInt(dangerositeField.getText()),
-                    Integer.parseInt(qtnField.getText()),
-                    Integer.parseInt(fournisseurField.getText()));
+            Produits produit = new Produits(
+                    libelleField.getText(),
+                    descriptionField.getText(),
+                    Integer.parseInt(niveauDangerositeField.getText()),
+                    Integer.parseInt(quantiteField.getText()),
+                    Integer.parseInt(refFournisseursField.getText())
+            );
+
             if (ProduitsRepository.addProduit(produit)) {
-                StartApplication.changeScene("stocks/stocksview.fxml");
+                StartApplication.changeScene("produits/produitsview.fxml");
             } else {
                 erreurText.setText("Erreur lors de l'ajout du produit.");
             }
@@ -37,6 +42,7 @@ public class AjouterProduitController {
 
     @FXML
     protected void onRetourClick() throws IOException {
-        StartApplication.changeScene("stocks/stocksview.fxml");
+        StartApplication.changeScene("produits/produitsview.fxml");
     }
 }
+

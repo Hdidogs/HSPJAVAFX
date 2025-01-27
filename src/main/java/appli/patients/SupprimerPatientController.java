@@ -20,7 +20,7 @@ public class SupprimerPatientController {
     }
 
     @FXML
-    protected void onSupprimerPatientClick() throws SQLException {
+    protected void onSupprimerPatientClick() throws SQLException, IOException {
         if (PatientsRepository.deletePatient(patient.getId())) {
             StartApplication.changeScene("patients/patientsview.fxml");
         } else {

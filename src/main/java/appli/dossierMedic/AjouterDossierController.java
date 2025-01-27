@@ -2,33 +2,46 @@ package appli.dossierMedic;
 
 import appli.StartApplication;
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.Dossiers;
 import repository.DossiersRepository;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 
 public class AjouterDossierController {
     @FXML
-    private TextField patientField, userField, symptomesField, graviteField, etatField;
+    private TextField refPatientsField, refUserField, symptomesField, niveauGraviteField, refEtatField;
+
+    @FXML
+    private DatePicker dateArriveePicker, dateCloturePicker;
 
     @FXML
     private Label erreurText;
 
     @FXML
-    protected void onAjouterDossierClick() throws SQLException {
-        if (patientField.getText().isEmpty() || userField.getText().isEmpty() ||
-                symptomesField.getText().isEmpty() || graviteField.getText().isEmpty() ||
-                etatField.getText().isEmpty()) {
-            erreurText.setText("Tous les champs doivent être remplis !");
+    protected void onAjouterDossierClick() throws SQLException, IOException {
+        if (refPatientsField.getText().isEmpty() || refUserField.getText().isEmpty() ||
+                symptomesField.getText().isEmpty() || niveauGraviteField.getText().isEmpty() ||
+                refEtatField.getText().isEmpty() || dateArriveePicker.getValue() == null) {
+            erreurText.setText("Tous les champs obligatoires doivent être remplis !");
         } else {
-            Dossiers dossier = new Dossiers(Integer.parseInt(patientField.getText()),
-                    Integer.parseInt(userField.getText()),
+            Date dateArrivee = Date.valueOf(dateArriveePicker.getValue());
+            Date dateCloture = dateCloturePicker.getValue() != null ? Date.valueOf(dateCloturePicker.getValue()) : null;
+
+            Dossiers dossier = new Dossiers(
+                    Integer.parseInt(refPatientsField.getText()),
+                    Integer.parseInt(refUserField.getText()),
+                    dateArrivee,
                     symptomesField.getText(),
-                    Integer.parseInt(graviteField.getText()),
-                    Integer.parseInt(etatField.getText()));
+                    Integer.parseInt(niveauGraviteField.getText()),
+                    Integer.parseInt(refEtatField.getText()),
+                    dateCloture
+            );
+
             if (DossiersRepository.addDossiers(dossier)) {
                 StartApplication.changeScene("dossiers/dossiersview.fxml");
             } else {
@@ -42,4 +55,5 @@ public class AjouterDossierController {
         StartApplication.changeScene("dossiers/dossiersview.fxml");
     }
 }
+
 

@@ -20,7 +20,7 @@ public class SupprimerProduitController {
     }
 
     @FXML
-    protected void onSupprimerProduitClick() throws SQLException {
+    protected void onSupprimerProduitClick() throws SQLException, IOException {
         if (ProduitsRepository.deleteProduit(produit.getId())) {
             StartApplication.changeScene("stocks/stocksview.fxml");
         } else {

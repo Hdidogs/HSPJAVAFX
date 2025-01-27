@@ -20,7 +20,7 @@ public class SupprimerDossierController {
     }
 
     @FXML
-    protected void onSupprimerDossierClick() throws SQLException {
+    protected void onSupprimerDossierClick() throws SQLException, IOException {
         if (DossiersRepository.deleteDossiers(dossier.getId())) {
             StartApplication.changeScene("dossiers/dossiersview.fxml");
         } else {
@@ -33,3 +33,4 @@ public class SupprimerDossierController {
         StartApplication.changeScene("dossiers/dossiersview.fxml");
     }
 }
+

@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class VisualiserDossierController {
     @FXML
-    private Label patientLabel, userLabel, symptomesLabel, graviteLabel, etatLabel, dateArriveeLabel, dateClotureLabel;
+    private Label refPatientsLabel, refUserLabel, symptomesLabel, niveauGraviteLabel, refEtatLabel, dateArriveeLabel, dateClotureLabel;
 
     private Dossiers dossier;
 
@@ -19,11 +19,11 @@ public class VisualiserDossierController {
 
     @FXML
     public void initialize() {
-        patientLabel.setText(String.valueOf(dossier.getPatientId()));
-        userLabel.setText(String.valueOf(dossier.getUserId()));
+        refPatientsLabel.setText(String.valueOf(dossier.getRefPatients()));
+        refUserLabel.setText(String.valueOf(dossier.getRefUser()));
         symptomesLabel.setText(dossier.getSymptomes());
-        graviteLabel.setText(String.valueOf(dossier.getGravite()));
-        etatLabel.setText(String.valueOf(dossier.getEtatId()));
+        niveauGraviteLabel.setText(String.valueOf(dossier.getNiveauGravite()));
+        refEtatLabel.setText(String.valueOf(dossier.getRefEtat()));
         dateArriveeLabel.setText(dossier.getDateArrivee().toString());
         dateClotureLabel.setText(dossier.getDateCloture() != null ? dossier.getDateCloture().toString() : "N/A");
     }
@@ -33,4 +33,5 @@ public class VisualiserDossierController {
         StartApplication.changeScene("dossiers/dossiersview.fxml");
     }
 }
+
 

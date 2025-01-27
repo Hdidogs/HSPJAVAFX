@@ -18,7 +18,7 @@ public class AjouterPatientController {
     private Label erreurText;
 
     @FXML
-    protected void onAjouterPatientClick() throws SQLException {
+    protected void onAjouterPatientClick() throws SQLException, IOException {
         if (nomField.getText().isEmpty() || prenomField.getText().isEmpty() || numSecuField.getText().isEmpty() ||
                 mailField.getText().isEmpty() || telField.getText().isEmpty() || rueField.getText().isEmpty() ||
                 villeField.getText().isEmpty() || cpField.getText().isEmpty()) {

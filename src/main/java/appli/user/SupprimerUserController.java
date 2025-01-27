@@ -20,7 +20,7 @@ public class SupprimerUserController {
     }
 
     @FXML
-    protected void onSupprimerUserClick() throws SQLException {
+    protected void onSupprimerUserClick() throws SQLException, IOException {
         if (UserRepository.deleteUser(user.getId())) {
             StartApplication.changeScene("users/usersview.fxml");
         } else {
