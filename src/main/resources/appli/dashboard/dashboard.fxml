@@ -1,58 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="appli.dashboard.DashboardController"
-            stylesheets="/styles/global.css">
+<BorderPane stylesheets="/styles/global.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="appli.dashboard.DashboardController">
     <top>
         <HBox alignment="CENTER" styleClass="header">
-            <Label text="Tableau de Bord" styleClass="page-title"/>
+            <Label styleClass="page-title" text="Tableau de Bord" />
         </HBox>
     </top>
     <left>
         <VBox spacing="10" styleClass="sidebar">
             <padding>
-                <Insets top="20" right="10" bottom="20" left="10"/>
+                <Insets bottom="20" left="10" right="10" top="20" />
             </padding>
-            <Button text="Patients" onAction="#showPatientManagement" styleClass="nav-button"/>
-            <Button text="Dossiers Médicaux" onAction="#showMedicalRecords" styleClass="nav-button"/>
-            <Button text="Stocks" onAction="#showStockManagement" styleClass="nav-button"/>
-            <Button text="Déconnexion" onAction="#handleLogout" styleClass="nav-button"/>
+            <Button onAction="#showPatientManagement" styleClass="nav-button" text="Patients" />
+            <Button onAction="#showMedicalRecords" styleClass="nav-button" text="Dossiers Médicaux" />
+            <Button onAction="#showStockManagement" styleClass="nav-button" text="Stocks" />
+            <Button onAction="#handleLogout" styleClass="nav-button" text="Déconnexion" />
         </VBox>
     </left>
     <center>
         <ScrollPane fitToWidth="true" styleClass="content-area">
             <VBox spacing="20">
                 <padding>
-                    <Insets top="20" right="20" bottom="20" left="20"/>
+                    <Insets bottom="20" left="20" right="20" top="20" />
                 </padding>
                 <HBox spacing="20">
                     <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
-                        <Label text="Patients" styleClass="stat-title"/>
-                        <Label fx:id="patientCountLabel" text="0" styleClass="stat-value"/>
+                        <Label styleClass="stat-title" text="Patients" />
+                        <Label fx:id="patientCountLabel" styleClass="stat-value" text="0" />
                     </VBox>
                     <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
-                        <Label text="Dossiers Actifs" styleClass="stat-title"/>
-                        <Label fx:id="activeDossiersLabel" text="0" styleClass="stat-value"/>
+                        <Label styleClass="stat-title" text="Dossiers Actifs" />
+                        <Label fx:id="activeDossiersLabel" styleClass="stat-value" text="0" />
                     </VBox>
                     <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
-                        <Label text="Produits en Stock" styleClass="stat-title"/>
-                        <Label fx:id="stockCountLabel" text="0" styleClass="stat-value"/>
+                        <Label styleClass="stat-title" text="Dossiers Fermés" />
+                        <Label fx:id="closeDossiersLabel" styleClass="stat-value" text="0" />
+                    </VBox>
+                    <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                        <Label styleClass="stat-title" text="Produits en Stock" />
+                        <Label fx:id="stockCountLabel" styleClass="stat-value" text="0" />
                     </VBox>
                 </HBox>
-                <TitledPane text="Statistiques des Patients" expanded="true">
-                    <PieChart fx:id="patientStatChart"/>
+                <TitledPane expanded="true" text="Statistiques des dossiers">
+                    <PieChart fx:id="patientStatChart" />
                 </TitledPane>
-                <TitledPane text="Évolution des Admissions" expanded="true">
+                <TitledPane expanded="true" text="Évolution des Admissions">
                     <LineChart fx:id="admissionsChart">
                         <xAxis>
-                            <CategoryAxis label="Mois"/>
+                            <CategoryAxis label="Mois" />
                         </xAxis>
                         <yAxis>
-                            <NumberAxis label="Nombre d'admissions"/>
+                            <NumberAxis label="Nombre d'admissions" />
                         </yAxis>
                     </LineChart>
                 </TitledPane>
@@ -60,4 +63,3 @@
         </ScrollPane>
     </center>
 </BorderPane>
-

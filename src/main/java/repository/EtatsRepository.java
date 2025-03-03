@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EtatsRepository {
-
     public static List<Etats> getAlletats() throws SQLException {
         List<Etats> etats = new ArrayList<>();
         Database db = new Database();
@@ -22,7 +21,7 @@ public class EtatsRepository {
 
         while (rs.next()) {
             etats.add(new Etats(
-                    rs.getInt("id_etats"),
+                    rs.getInt("id_etat"),
                     rs.getString("libelle")
             ));
         }

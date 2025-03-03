@@ -22,10 +22,10 @@
             <Tab text="Inscription">
                 <VBox spacing="15">
                     <TextField fx:id="registerNameField" promptText="Nom" styleClass="input-field"/>
+                    <TextField fx:id="registerFirstNameField" promptText="Prenom" styleClass="input-field"/>
                     <TextField fx:id="registerEmailField" promptText="Email" styleClass="input-field"/>
                     <PasswordField fx:id="registerPasswordField" promptText="Mot de passe" styleClass="input-field"/>
                     <PasswordField fx:id="confirmPasswordField" promptText="Confirmer le mot de passe" styleClass="input-field"/>
-                    <ComboBox fx:id="roleComboBox" promptText="Rôle" styleClass="input-field"/>
                     <Button text="S'inscrire" onAction="#handleRegister" styleClass="secondary-button"/>
                 </VBox>
             </Tab>

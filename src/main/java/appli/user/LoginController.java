@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import model.Role;
 import model.User;
 import repository.UserRepository;
 
@@ -26,6 +27,9 @@ public class LoginController {
     private TextField registerNameField;
 
     @FXML
+    private TextField registerFirstNameField;
+
+    @FXML
     private TextField registerEmailField;
 
     @FXML
@@ -35,25 +39,7 @@ public class LoginController {
     private PasswordField confirmPasswordField;
 
     @FXML
-    private ComboBox<String> roleComboBox;
-
-    @FXML
     public void initialize() {
-        // Initialisation des rôles dans le ComboBox
-        loadRoles();
-    }
-
-    /**
-     * Charge les rôles dans le ComboBox.
-     */
-    private void loadRoles() {
-        try {
-            List<String> roles = UserRepository.getAllRoles();
-            ObservableList<String> roleOptions = FXCollections.observableArrayList(roles);
-            roleComboBox.setItems(roleOptions);
-        } catch (SQLException e) {
-            showAlert("Erreur", "Erreur lors du chargement des rôles : " + e.getMessage(), Alert.AlertType.ERROR);
-        }
     }
 
     /**
@@ -72,9 +58,7 @@ public class LoginController {
         try {
             User user = UserRepository.login(email, password);
             if (user != null) {
-                showAlert("Succès", "Connexion réussie.", Alert.AlertType.INFORMATION);
-                // Redirection vers le tableau de bord
-                StartApplication.changeScene("dashboard/dashboardview.fxml");
+                StartApplication.changeScene("dashboard/dashboard.fxml");
             } else {
                 showAlert("Erreur", "Email ou mot de passe incorrect.", Alert.AlertType.ERROR);
             }
@@ -91,12 +75,12 @@ public class LoginController {
     @FXML
     private void handleRegister() {
         String name = registerNameField.getText().trim();
+        String firstName = registerFirstNameField.getText().trim();
         String email = registerEmailField.getText().trim();
         String password = registerPasswordField.getText().trim();
         String confirmPassword = confirmPasswordField.getText().trim();
-        String role = roleComboBox.getValue();
 
-        if (name.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || role == null) {
+        if (name.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             showAlert("Erreur", "Veuillez remplir tous les champs.", Alert.AlertType.WARNING);
             return;
         }
@@ -107,7 +91,7 @@ public class LoginController {
         }
 
         try {
-            User newUser = new User(name, email, password, role);
+            User newUser = new User(name, firstName, email, password, 1);
             if (UserRepository.register(newUser)) {
                 showAlert("Succès", "Inscription réussie.", Alert.AlertType.INFORMATION);
                 clearRegisterForm();
@@ -124,11 +108,10 @@ public class LoginController {
      */
     private void clearRegisterForm() {
         registerNameField.clear();
+        registerFirstNameField.clear();
         registerEmailField.clear();
         registerPasswordField.clear();
-        confirmPasswordField.clear();
-        roleComboBox.setValue(null);
-    }
+        confirmPasswordField.clear();}
 
     /**
      * Affiche une alerte.

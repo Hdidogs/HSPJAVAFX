@@ -89,6 +89,22 @@ public class PatientsRepository {
         return patients;
     }
 
+    public static int getNumberPatients() throws SQLException {
+        Database db = new Database();
+        Connection cnx = db.getConnection();
+
+        String sql = "SELECT COUNT(id_patients) AS total FROM `patients`";
+        PreparedStatement req = cnx.prepareStatement(sql);
+
+        ResultSet rs = req.executeQuery();
+
+        if (rs.next()) {
+            return rs.getInt("total");
+        }
+
+        return 0;
+    }
+
     public static Patients getPatientById(int refPatients) throws SQLException {
         Database db = new Database();
         Connection cnx = db.getConnection();

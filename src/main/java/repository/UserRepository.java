@@ -1,6 +1,7 @@
 package repository;
 
 import database.Database;
+import model.Role;
 import model.User;
 
 import java.sql.Connection;
@@ -81,16 +82,16 @@ public class UserRepository {
         return users;
     }
 
-    public static List<String> getAllRoles() throws SQLException {
-        List<String> roles = new ArrayList<>();
+    public static List<Role> getAllRoles() throws SQLException {
+        List<Role> roles = new ArrayList<>();
         Database db = new Database();
         Connection cnx = db.getConnection();
 
-        PreparedStatement req = cnx.prepareStatement("SELECT libelle FROM role");
+        PreparedStatement req = cnx.prepareStatement("SELECT id_role, libelle FROM role");
         ResultSet rs = req.executeQuery();
 
         while (rs.next()) {
-            roles.add(rs.getString("libelle"));
+            roles.add(new Role(rs.getInt("id_role"), rs.getString("libelle")));
         }
 
         return roles;

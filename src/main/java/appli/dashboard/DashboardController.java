@@ -6,8 +6,15 @@ import javafx.scene.control.Label;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
+import model.Etats;
+import repository.DossiersRepository;
+import repository.EtatsRepository;
+import repository.PatientsRepository;
+import repository.ProduitsRepository;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 public class DashboardController {
 
@@ -16,6 +23,9 @@ public class DashboardController {
 
     @FXML
     private Label activeDossiersLabel;
+
+    @FXML
+    private Label closeDossiersLabel;
 
     @FXML
     private Label stockCountLabel;
@@ -27,41 +37,52 @@ public class DashboardController {
     private LineChart<String, Number> admissionsChart;
 
     @FXML
-    public void initialize() {
+    public void initialize() throws SQLException {
         loadStatistics();
         loadPatientStatsChart();
         loadAdmissionsChart();
     }
 
-    private void loadStatistics() {
-        int totalPatients = 120;
-        int activeDossiers = 45;
-        int stockCount = 350;
+    private void loadStatistics() throws SQLException {
+        int totalPatients = PatientsRepository.getNumberPatients();
+        int activeDossiers = DossiersRepository.getDossiersActive();
+        int closeDossiers = DossiersRepository.getDossiersClose();;
+        int stockCount = ProduitsRepository.getNumberProduits();
 
         // Mise à jour des labels
         patientCountLabel.setText(String.valueOf(totalPatients));
         activeDossiersLabel.setText(String.valueOf(activeDossiers));
+        closeDossiersLabel.setText(String.valueOf(closeDossiers));
         stockCountLabel.setText(String.valueOf(stockCount));
     }
 
-    private void loadPatientStatsChart() {
-        // Exemple de données fictives
-        patientStatChart.getData().addAll(
-                new PieChart.Data("Hommes", 60),
-                new PieChart.Data("Femmes", 50),
-                new PieChart.Data("Enfants", 10)
-        );
+    private void loadPatientStatsChart() throws SQLException {
+        List<Etats> etats = EtatsRepository.getAlletats();
+        for (Etats etat : etats) {
+            patientStatChart.getData().add(new PieChart.Data(etat.getLibelle(), DossiersRepository.getDossiersByEtat(etat.getId())));
+        }
+        //patientStatChart.getData().addAll(
+        //        new PieChart.Data("Hommes", 60),
+        //        new PieChart.Data("Femmes", 50),
+        //        new PieChart.Data("Enfants", 10)
+        //);
     }
 
-    private void loadAdmissionsChart() {
+    private void loadAdmissionsChart() throws SQLException {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Admissions par mois");
-        series.getData().add(new XYChart.Data<>("Janvier", 15));
-        series.getData().add(new XYChart.Data<>("Février", 20));
-        series.getData().add(new XYChart.Data<>("Mars", 30));
-        series.getData().add(new XYChart.Data<>("Avril", 25));
-        series.getData().add(new XYChart.Data<>("Mai", 35));
-        series.getData().add(new XYChart.Data<>("Juin", 40));
+        series.getData().add(new XYChart.Data<>("Janvier", DossiersRepository.getDossiersByMonth(1)));
+        series.getData().add(new XYChart.Data<>("Février", DossiersRepository.getDossiersByMonth(2)));
+        series.getData().add(new XYChart.Data<>("Mars", DossiersRepository.getDossiersByMonth(3)));
+        series.getData().add(new XYChart.Data<>("Avril", DossiersRepository.getDossiersByMonth(4)));
+        series.getData().add(new XYChart.Data<>("Mai", DossiersRepository.getDossiersByMonth(5)));
+        series.getData().add(new XYChart.Data<>("Juin", DossiersRepository.getDossiersByMonth(6)));
+        series.getData().add(new XYChart.Data<>("Juillet", DossiersRepository.getDossiersByMonth(7)));
+        series.getData().add(new XYChart.Data<>("Août", DossiersRepository.getDossiersByMonth(8)));
+        series.getData().add(new XYChart.Data<>("Septembre", DossiersRepository.getDossiersByMonth(9)));
+        series.getData().add(new XYChart.Data<>("Octobre", DossiersRepository.getDossiersByMonth(10)));
+        series.getData().add(new XYChart.Data<>("Novembre", DossiersRepository.getDossiersByMonth(11)));
+        series.getData().add(new XYChart.Data<>("Décembre", DossiersRepository.getDossiersByMonth(12)));
 
         admissionsChart.getData().add(series);
     }

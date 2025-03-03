@@ -29,6 +29,22 @@ public class ProduitsRepository {
         return req.executeUpdate() == 1;
     }
 
+    public static int getNumberProduits() throws SQLException {
+        Database db = new Database();
+        Connection cnx = db.getConnection();
+
+        String sql = "SELECT COUNT(id_produits) AS total FROM `produits`";
+        PreparedStatement req = cnx.prepareStatement(sql);
+
+        ResultSet rs = req.executeQuery();
+
+        if (rs.next()) {
+            return rs.getInt("total");
+        }
+
+        return 0;
+    }
+
     public static boolean deleteProduit(int idProduit) throws SQLException {
         Database db = new Database();
         Connection cnx = db.getConnection();

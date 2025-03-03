@@ -50,4 +50,9 @@ public class Fournisseurs {
     public void setPrixUnitaire(float prixUnitaire) {
         this.prixUnitaire = prixUnitaire;
     }
+
+    @Override
+    public String toString() {
+        return this.nom;
+    }
 }

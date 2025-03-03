@@ -28,4 +28,9 @@ public class Role {
     public void setLibelle(String libelle) {
         this.libelle = libelle;
     }
+
+    @Override
+    public String toString() {
+        return getLibelle();
+    }
 }

@@ -18,8 +18,6 @@ public class Database {
     public Connection getConnection() {
         try {
             Connection cnx = DriverManager.getConnection(getUrl(), utilisateur, motDePasse);
-            System.out.println("État de connexion : ");
-            System.out.println(cnx.isClosed() ? "Fermée" : "Ouverte \r\n");
             return cnx;
         } catch (SQLException e) {
             System.out.println("Erreur lors de la tentative de connexion à la base de données.");

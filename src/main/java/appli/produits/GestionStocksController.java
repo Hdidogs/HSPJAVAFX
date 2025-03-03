@@ -1,16 +1,20 @@
 package appli.produits;
 
+import appli.StartApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Box;
 import model.Produits;
 import model.Fournisseurs;
 import repository.ProduitsRepository;
 import repository.FournisseursRepository;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -44,13 +48,22 @@ public class GestionStocksController {
     private TextField descriptionField;
 
     @FXML
-    private ComboBox<Integer> niveauDangerositeComboBox;
+    private ComboBox<String> niveauDangerositeComboBox;
 
     @FXML
     private TextField quantiteField;
 
     @FXML
     private ComboBox<Fournisseurs> fournisseurComboBox;
+
+    @FXML
+    private Button ajoutProduitButton;
+
+    @FXML
+    private Button modificationProduitButton;
+
+    @FXML
+    private VBox box;
 
     private Produits selectedProduit;
 
@@ -71,6 +84,9 @@ public class GestionStocksController {
 
             // Gestion de la sélection dans la table
             produitTable.setOnMouseClicked(this::handleTableClick);
+            box.setOnMouseClicked(this::boxTableClick);
+
+            modificationProduitButton.setDisable(true);
         } catch (Exception e) {
             showAlert("Erreur", "Erreur lors de l'initialisation : " + e.getMessage(), Alert.AlertType.ERROR);
         }
@@ -106,7 +122,7 @@ public class GestionStocksController {
      * Charge les options de niveau de dangerosité.
      */
     private void loadNiveauDangerositeOptions() {
-        ObservableList<Integer> dangerositeOptions = FXCollections.observableArrayList(1, 2, 3, 4, 5);
+        ObservableList<String> dangerositeOptions = FXCollections.observableArrayList("1", "2", "3", "4", "5");
         niveauDangerositeComboBox.setItems(dangerositeOptions);
     }
 
@@ -124,6 +140,11 @@ public class GestionStocksController {
         }
     }
 
+    @FXML
+    private void backButton() throws IOException {
+        StartApplication.changeScene("dashboard/dashboard.fxml");
+    }
+
     /**
      * Gère l'ajout d'un produit.
      */
@@ -133,7 +154,7 @@ public class GestionStocksController {
             Produits newProduit = new Produits(
                     libelleField.getText(),
                     descriptionField.getText(),
-                    niveauDangerositeComboBox.getValue(),
+                    Integer.parseInt(niveauDangerositeComboBox.getValue()),
                     Integer.parseInt(quantiteField.getText()),
                     fournisseurComboBox.getValue().getId()
             );
@@ -160,7 +181,7 @@ public class GestionStocksController {
         if (selectedProduit != null && isFormValid()) {
             selectedProduit.setLibelle(libelleField.getText());
             selectedProduit.setDescription(descriptionField.getText());
-            selectedProduit.setNiveauDangerosite(niveauDangerositeComboBox.getValue());
+            selectedProduit.setNiveauDangerosite(Integer.parseInt(niveauDangerositeComboBox.getValue()));
             selectedProduit.setQuantite(Integer.parseInt(quantiteField.getText()));
             selectedProduit.setRefFournisseurs(fournisseurComboBox.getValue().getId());
 
@@ -187,14 +208,25 @@ public class GestionStocksController {
             if (selectedProduit != null) {
                 libelleField.setText(selectedProduit.getLibelle());
                 descriptionField.setText(selectedProduit.getDescription());
-                niveauDangerositeComboBox.setValue(selectedProduit.getNiveauDangerosite());
+                niveauDangerositeComboBox.setValue(String.valueOf(selectedProduit.getNiveauDangerosite()));
                 quantiteField.setText(String.valueOf(selectedProduit.getQuantite()));
                 fournisseurComboBox.setValue(FournisseursRepository.getFournisseurById(selectedProduit.getRefFournisseurs()));
+
+                ajoutProduitButton.setDisable(true);
+                modificationProduitButton.setDisable(false);
             }
         } catch (SQLException e) {
             showAlert("Erreur", "Erreur lors de la sélection : " + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
+
+    private void boxTableClick(MouseEvent event) {
+        clearForm();
+
+        ajoutProduitButton.setDisable(false);
+        modificationProduitButton.setDisable(true);
+    }
+
 
     /**
      * Valide les champs du formulaire.
@@ -216,6 +248,7 @@ public class GestionStocksController {
         libelleField.clear();
         descriptionField.clear();
         niveauDangerositeComboBox.setValue(null);
+        niveauDangerositeComboBox.setPromptText("Niveau de dangerosité");
         quantiteField.clear();
         fournisseurComboBox.setValue(null);
         selectedProduit = null;

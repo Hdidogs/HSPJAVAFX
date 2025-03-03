@@ -25,7 +25,7 @@ public class StartApplication extends Application {
 
     public static void changeScene(String nomDuFichierFxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource(nomDuFichierFxml));
-        Scene scene = new Scene(fxmlLoader.load(), 1080, 760);
+        Scene scene = new Scene(fxmlLoader.load(), main.getWidth(), main.getHeight());
         main.setScene(scene);
         main.show();
     }
@@ -36,7 +36,7 @@ public class StartApplication extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource(nomDuFichierFxml + ".fxml"));
             fxmlLoader.setController(controller);
-            Scene scene = new Scene(fxmlLoader.load());
+            Scene scene = new Scene(fxmlLoader.load(), main.getWidth(), main.getHeight());
             main.setScene(scene);
             main.show();
         } catch (IOException e) {

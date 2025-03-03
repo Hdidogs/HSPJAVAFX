@@ -1,5 +1,6 @@
 package appli.dossierMedic;
 
+import appli.StartApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,6 +12,7 @@ import repository.DossiersRepository;
 import repository.EtatsRepository;
 import repository.PatientsRepository;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
@@ -54,6 +56,11 @@ public class DossiersMedicauxController {
     private ComboBox<Etats> etatComboBox;
 
     private Dossiers selectedDossier;
+
+    @FXML
+    private void backButton() throws IOException {
+        StartApplication.changeScene("dashboard/dashboard.fxml");
+    }
 
     @FXML
     public void initialize() {

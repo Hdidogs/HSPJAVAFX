@@ -46,6 +46,7 @@
                 <Button text="Ajouter" onAction="#handleAdd" styleClass="primary-button"/>
                 <Button text="Modifier" onAction="#handleUpdate" styleClass="secondary-button"/>
             </HBox>
+            <Button mnemonicParsing="false" onAction="#backButton" text="Retour" />
         </VBox>
     </right>
 </BorderPane>

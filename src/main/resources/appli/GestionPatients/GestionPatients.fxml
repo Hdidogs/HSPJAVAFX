@@ -44,10 +44,12 @@
             <TextField fx:id="mailField" promptText="Email" styleClass="input-field"/>
             <TextField fx:id="telField" promptText="Téléphone" styleClass="input-field"/>
             <TextField fx:id="adresseField" promptText="Adresse" styleClass="input-field"/>
+            <TextField fx:id="villeField" promptText="Ville" styleClass="input-field"/>
             <HBox spacing="10">
                 <Button text="Ajouter" onAction="#handleAdd" styleClass="primary-button"/>
                 <Button text="Modifier" onAction="#handleUpdate" styleClass="secondary-button"/>
             </HBox>
+            <Button mnemonicParsing="false" onAction="#backButton" text="Retour" />
         </VBox>
     </right>
 </BorderPane>

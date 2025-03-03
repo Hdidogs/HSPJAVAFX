@@ -1,52 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="appli.produits.GestionStocksController"
-            stylesheets="/styles/global.css">
+<BorderPane stylesheets="/styles/global.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="appli.produits.GestionStocksController">
     <top>
         <HBox alignment="CENTER" styleClass="header">
-            <Label text="Gestion des Stocks" styleClass="page-title"/>
+            <Label styleClass="page-title" text="Gestion des Stocks" />
         </HBox>
     </top>
     <center>
         <VBox spacing="20" styleClass="content-area">
             <padding>
-                <Insets top="20" right="20" bottom="20" left="20"/>
+                <Insets bottom="20" left="20" right="20" top="20" />
             </padding>
-            <HBox spacing="10" alignment="CENTER_LEFT">
-                <TextField fx:id="searchField" promptText="Rechercher un produit" HBox.hgrow="ALWAYS"/>
-                <Button text="Rechercher" onAction="#handleSearch" styleClass="search-button"/>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <TextField fx:id="searchField" promptText="Rechercher un produit" HBox.hgrow="ALWAYS" />
+                <Button onAction="#handleSearch" styleClass="search-button" text="Rechercher" />
             </HBox>
             <TableView fx:id="produitTable" VBox.vgrow="ALWAYS">
                 <columns>
-                    <TableColumn text="Libellé" fx:id="libelleColumn"/>
-                    <TableColumn text="Description" fx:id="descriptionColumn"/>
-                    <TableColumn text="Niveau de dangerosité" fx:id="niveauDangerositeColumn"/>
-                    <TableColumn text="Quantité" fx:id="quantiteColumn"/>
-                    <TableColumn text="Fournisseur" fx:id="fournisseurColumn"/>
+                    <TableColumn fx:id="libelleColumn" text="Libellé" />
+                    <TableColumn fx:id="descriptionColumn" text="Description" />
+                    <TableColumn fx:id="niveauDangerositeColumn" text="Niveau de dangerosité" />
+                    <TableColumn fx:id="quantiteColumn" text="Quantité" />
+                    <TableColumn fx:id="fournisseurColumn" text="Fournisseur" />
                 </columns>
             </TableView>
         </VBox>
     </center>
     <right>
-        <VBox spacing="10" styleClass="side-panel">
+        <VBox spacing="10" fx:id="box" styleClass="side-panel">
             <padding>
-                <Insets top="20" right="20" bottom="20" left="20"/>
+                <Insets bottom="20" left="20" right="20" top="20" />
             </padding>
-            <Label text="Ajouter/Modifier un produit" styleClass="section-title"/>
-            <TextField fx:id="libelleField" promptText="Libellé" styleClass="input-field"/>
-            <TextField fx:id="descriptionField" promptText="Description" styleClass="input-field"/>
-            <ComboBox fx:id="niveauDangerositeComboBox" promptText="Niveau de dangerosité" styleClass="input-field"/>
-            <TextField fx:id="quantiteField" promptText="Quantité" styleClass="input-field"/>
-            <ComboBox fx:id="fournisseurComboBox" promptText="Fournisseur" styleClass="input-field"/>
+            <Label styleClass="section-title" text="Ajouter/Modifier un produit" />
+            <TextField fx:id="libelleField" promptText="Libellé" styleClass="input-field" />
+            <TextField fx:id="descriptionField" promptText="Description" styleClass="input-field" />
+            <ComboBox fx:id="niveauDangerositeComboBox" promptText="Niveau de dangerosité" styleClass="input-field" />
+            <TextField fx:id="quantiteField" promptText="Quantité" styleClass="input-field" />
+            <ComboBox fx:id="fournisseurComboBox" promptText="Fournisseur" styleClass="input-field" />
             <HBox spacing="10">
-                <Button text="Ajouter" onAction="#handleAdd" styleClass="primary-button"/>
-                <Button text="Modifier" onAction="#handleUpdate" styleClass="secondary-button"/>
+                <Button fx:id="ajoutProduitButton" onAction="#handleAdd" styleClass="primary-button" text="Ajouter" />
+                <Button fx:id="modificationProduitButton" onAction="#handleUpdate" styleClass="secondary-button" text="Modifier" />
             </HBox>
+         <Button mnemonicParsing="false" onAction="#backButton" text="Retour" />
         </VBox>
     </right>
 </BorderPane>
-

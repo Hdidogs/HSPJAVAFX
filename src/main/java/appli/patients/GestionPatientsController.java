@@ -1,5 +1,6 @@
 package appli.patients;
 
+import appli.StartApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import model.Patients;
 import repository.PatientsRepository;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -56,6 +58,9 @@ public class GestionPatientsController {
     @FXML
     private TextField adresseField;
 
+    @FXML
+    private TextField villeField;
+
     private Patients selectedPatient;
 
     @FXML
@@ -87,6 +92,10 @@ public class GestionPatientsController {
         }
     }
 
+    @FXML
+    private void backButton() throws IOException {
+        StartApplication.changeScene("dashboard/dashboard.fxml");
+    }
 
     @FXML
     private void handleSearch() {
@@ -110,7 +119,7 @@ public class GestionPatientsController {
                     mailField.getText(),
                     telField.getText(),
                     adresseField.getText(),
-                    "Ville inconnue",
+                    villeField.getText(),
                     0
             );
 

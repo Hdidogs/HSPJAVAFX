@@ -7,7 +7,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-// Repository for Dossiers
 public class DossiersRepository {
     public static boolean addDossiers(Dossiers dossier) throws SQLException {
         return addDossiers(dossier.getRefPatients(), dossier.getRefUser(), dossier.getDateArrivee(), dossier.getSymptomes(), dossier.getNiveauGravite(), dossier.getRefEtat(), dossier.getDateCloture());
@@ -45,6 +44,72 @@ public class DossiersRepository {
 
     public static boolean updateDossiers(Dossiers dossier) throws SQLException {
         return updateDossiers(dossier.getId(), dossier.getRefPatients(), dossier.getRefUser(), dossier.getDateArrivee(), dossier.getSymptomes(), dossier.getNiveauGravite(), dossier.getRefEtat(), dossier.getDateCloture());
+    }
+
+    public static int getDossiersClose() throws SQLException {
+        Database db = new Database();
+        Connection cnx = db.getConnection();
+
+        String sql = "SELECT COUNT(id_dossiers) AS total FROM `dossiers` WHERE date_cloture IS NOT NULL";
+        PreparedStatement req = cnx.prepareStatement(sql);
+
+        ResultSet rs = req.executeQuery();
+
+        if (rs.next()) {
+            return rs.getInt("total");
+        }
+
+        return 0;
+    }
+
+    public static int getDossiersActive() throws SQLException {
+        Database db = new Database();
+        Connection cnx = db.getConnection();
+
+        String sql = "SELECT COUNT(id_dossiers) AS total FROM `dossiers` WHERE date_cloture IS NULL";
+        PreparedStatement req = cnx.prepareStatement(sql);
+
+        ResultSet rs = req.executeQuery();
+
+        if (rs.next()) {
+            return rs.getInt("total");
+        }
+
+        return 0;
+    }
+
+    public static int getDossiersByEtat(int id) throws SQLException {
+        Database db = new Database();
+        Connection cnx = db.getConnection();
+
+        String sql = "SELECT COUNT(id_dossiers) AS total FROM `dossiers` WHERE ref_etat = ?";
+        PreparedStatement req = cnx.prepareStatement(sql);
+        req.setInt(1, id);
+
+        ResultSet rs = req.executeQuery();
+
+        if (rs.next()) {
+            return rs.getInt("total");
+        }
+
+        return 0;
+    }
+
+    public static int getDossiersByMonth(int month) throws SQLException {
+        Database db = new Database();
+        Connection cnx = db.getConnection();
+
+        String sql = "SELECT COUNT(id_dossiers) AS total FROM `dossiers` WHERE MONTH(date_arrivee) = ?";
+        PreparedStatement req = cnx.prepareStatement(sql);
+        req.setInt(1, month);
+
+        ResultSet rs = req.executeQuery();
+
+        if (rs.next()) {
+            return rs.getInt("total");
+        }
+
+        return 0;
     }
 
     public static boolean updateDossiers(int idDossiers, int refPatients, int refUser, Date dateArrivee, String symptomes, int niveauGravite, int refEtat, Date dateCloture) throws SQLException {
