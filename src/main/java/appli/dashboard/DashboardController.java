@@ -7,6 +7,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import model.Etats;
+import model.UserLog;
 import repository.DossiersRepository;
 import repository.EtatsRepository;
 import repository.PatientsRepository;
@@ -20,6 +21,9 @@ public class DashboardController {
 
     @FXML
     private Label patientCountLabel;
+
+    @FXML
+    private Label textHeader;
 
     @FXML
     private Label activeDossiersLabel;
@@ -38,6 +42,8 @@ public class DashboardController {
 
     @FXML
     public void initialize() throws SQLException {
+        textHeader.setText(textHeader.getText() + " - " + UserLog.getInstance().getNom() + " " + UserLog.getInstance().getPrenom());
+
         loadStatistics();
         loadPatientStatsChart();
         loadAdmissionsChart();
@@ -61,11 +67,6 @@ public class DashboardController {
         for (Etats etat : etats) {
             patientStatChart.getData().add(new PieChart.Data(etat.getLibelle(), DossiersRepository.getDossiersByEtat(etat.getId())));
         }
-        //patientStatChart.getData().addAll(
-        //        new PieChart.Data("Hommes", 60),
-        //        new PieChart.Data("Femmes", 50),
-        //        new PieChart.Data("Enfants", 10)
-        //);
     }
 
     private void loadAdmissionsChart() throws SQLException {
@@ -104,6 +105,8 @@ public class DashboardController {
 
     @FXML
     private void handleLogout() throws IOException {
-        StartApplication.changeScene("Login/Login.fxml");
+        if (UserLog.clearInstance()) {
+            StartApplication.changeScene("Login/Login.fxml");
+        }
     }
 }

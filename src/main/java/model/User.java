@@ -11,7 +11,6 @@ public class User {
     private int refRole;
     private Date dateCreation;
 
-    // Constructeur complet
     public User(int id, String nom, String prenom, String mail, String motDePasse, int refRole, Date dateCreation) {
         this.id = id;
         this.nom = nom;
@@ -22,7 +21,6 @@ public class User {
         this.dateCreation = dateCreation;
     }
 
-    // Constructeur sans id et date de création
     public User(String nom, String prenom, String mail, String motDePasse, int refRole) {
         this.nom = nom;
         this.prenom = prenom;
@@ -31,7 +29,6 @@ public class User {
         this.refRole = refRole;
     }
 
-    // Constructeur minimaliste
     public User(String nom, String prenom, String mail, String motDePasse) {
         this.nom = nom;
         this.prenom = prenom;

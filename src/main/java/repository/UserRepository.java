@@ -3,6 +3,7 @@ package repository;
 import database.Database;
 import model.Role;
 import model.User;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,12 +20,13 @@ public class UserRepository {
     public static boolean addUser(String nom, String prenom, String mail, String motDePasse, int refRole) throws SQLException {
         Database db = new Database();
         Connection cnx = db.getConnection();
+        String mdp = BCrypt.hashpw(motDePasse, BCrypt.gensalt());
 
-        PreparedStatement req = cnx.prepareStatement("INSERT INTO user (nom, prenom, mail, mdp, ref_role) VALUES (?, ?, ?, ?, ?)");
+        PreparedStatement req = cnx.prepareStatement("INSERT INTO user (nom, prenom, mail, mdp, ref_role, date_creation) VALUES (?, ?, ?, ?, ?, NOW())");
         req.setString(1, nom);
         req.setString(2, prenom);
         req.setString(3, mail);
-        req.setString(4, motDePasse);
+        req.setString(4, mdp);
         req.setInt(5, refRole);
 
         return req.executeUpdate() == 1;
@@ -101,40 +103,29 @@ public class UserRepository {
         Database db = new Database();
         Connection cnx = db.getConnection();
 
-        String sql = "SELECT * FROM user WHERE mail = ? AND mdp = ?";
+        String sql = "SELECT * FROM user WHERE mail = ?";
         PreparedStatement req = cnx.prepareStatement(sql);
         req.setString(1, email);
-        req.setString(2, password);
 
         ResultSet rs = req.executeQuery();
 
         if (rs.next()) {
-            return new User(
-                    rs.getInt("id_user"),
-                    rs.getString("nom"),
-                    rs.getString("prenom"),
-                    rs.getString("mail"),
-                    rs.getString("mdp"),
-                    rs.getInt("ref_role"),
-                    rs.getDate("date_creation")
-            );
+            String mdp = rs.getString("mdp");
+            if (BCrypt.checkpw(password, mdp)) {
+                return new User(
+                        rs.getInt("id_user"),
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getString("mail"),
+                        rs.getString("mdp"),
+                        rs.getInt("ref_role"),
+                        rs.getDate("date_creation")
+                );
+            } else {
+                return null;
+            }
         }
 
         return null;
-    }
-
-    public static boolean register(User newUser) throws SQLException {
-        Database db = new Database();
-        Connection cnx = db.getConnection();
-
-        String sql = "INSERT INTO user (nom, prenom, mail, mdp, ref_role, date_creation) VALUES (?, ?, ?, ?, ?, NOW())";
-        PreparedStatement req = cnx.prepareStatement(sql);
-        req.setString(1, newUser.getNom());
-        req.setString(2, newUser.getPrenom());
-        req.setString(3, newUser.getMail());
-        req.setString(4, newUser.getMotDePasse());
-        req.setInt(5, newUser.getRefRole());
-
-        return req.executeUpdate() == 1;
     }
 }

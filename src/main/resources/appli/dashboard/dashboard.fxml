@@ -8,7 +8,7 @@
 <BorderPane stylesheets="/styles/global.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="appli.dashboard.DashboardController">
     <top>
         <HBox alignment="CENTER" styleClass="header">
-            <Label styleClass="page-title" text="Tableau de Bord" />
+            <Label styleClass="page-title" fx:id="textHeader" text="Tableau de Bord" />
         </HBox>
     </top>
     <left>

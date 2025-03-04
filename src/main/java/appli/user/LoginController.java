@@ -1,17 +1,14 @@
 package appli.user;
 
 import appli.StartApplication;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import model.Role;
 import model.User;
+import model.UserLog;
 import repository.UserRepository;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 public class LoginController {
 
@@ -58,7 +55,9 @@ public class LoginController {
         try {
             User user = UserRepository.login(email, password);
             if (user != null) {
-                StartApplication.changeScene("dashboard/dashboard.fxml");
+                if (UserLog.initInstance(user)) {
+                    StartApplication.changeScene("dashboard/dashboard.fxml");
+                }
             } else {
                 showAlert("Erreur", "Email ou mot de passe incorrect.", Alert.AlertType.ERROR);
             }
@@ -92,7 +91,7 @@ public class LoginController {
 
         try {
             User newUser = new User(name, firstName, email, password, 1);
-            if (UserRepository.register(newUser)) {
+            if (UserRepository.addUser(newUser)) {
                 showAlert("Succès", "Inscription réussie.", Alert.AlertType.INFORMATION);
                 clearRegisterForm();
             } else {
