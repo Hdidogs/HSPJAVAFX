@@ -106,4 +106,13 @@ public class Patients {
     public void setCp(int cp) {
         this.cp = cp;
     }
+
+    public String getAdresseComplete() {
+        return rue + ", " + ville;
+    }
+
+    @Override
+    public String toString() {
+        return nom + " " + prenom;
+    }
 }

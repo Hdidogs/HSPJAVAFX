@@ -79,6 +79,54 @@ public class DossiersMedicauxController {
 
         // Gestion de la sélection dans la table
         dossierTable.setOnMouseClicked(this::handleTableClick);
+
+        patientComboBox.setCellFactory(param -> new ListCell<Patients>() {
+            @Override
+            protected void updateItem(Patients item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.getNom() + " " + item.getPrenom());
+                }
+            }
+        });
+
+        patientComboBox.setButtonCell(new ListCell<Patients>() {
+            @Override
+            protected void updateItem(Patients item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.getNom() + " " + item.getPrenom());
+                }
+            }
+        });
+
+        etatComboBox.setCellFactory(param -> new ListCell<Etats>() {
+            @Override
+            protected void updateItem(Etats item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.getLibelle());
+                }
+            }
+        });
+
+        etatComboBox.setButtonCell(new ListCell<Etats>() {
+            @Override
+            protected void updateItem(Etats item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.getLibelle());
+                }
+            }
+        });
     }
 
     private void loadTableData() {
@@ -133,7 +181,7 @@ public class DossiersMedicauxController {
             if (isFormValid()) {
                 Dossiers newDossier = new Dossiers(
                         patientComboBox.getValue().getId(),
-                        1, // Remplacer par l'utilisateur connecté
+                        2,
                         Date.valueOf(dateArriveeField.getValue()),
                         symptomesField.getText(),
                         niveauGraviteComboBox.getValue(),

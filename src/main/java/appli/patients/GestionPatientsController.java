@@ -81,7 +81,6 @@ public class GestionPatientsController {
         }
     }
 
-
     private void loadTableData() {
         try {
             List<Patients> patientsList = PatientsRepository.getAllPatients();
