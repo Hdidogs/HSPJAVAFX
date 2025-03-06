@@ -1,31 +1,28 @@
 package model;
 
-import java.sql.Date;
-
 public class Chambres {
     private int id;
     private String num;
-    private boolean dispo;
-    private Date dateDebut;
-    private Date dateFin;
-    private int refDossiers;
+    private String type;
+    private int capacite;
+    private String status;
+    private int litOccupe;
 
-    public Chambres(int id, String num, boolean dispo, Date dateDebut, Date dateFin, int refDossiers) {
+    public Chambres(int id, String num,String type, int capacite, String status, int litOccupe) {
         this.id = id;
         this.num = num;
-        this.dispo = dispo;
-        this.dateDebut = dateDebut;
-        this.dateFin = dateFin;
-        this.refDossiers = refDossiers;
+        this.type = type;
+        this.capacite = capacite;
+        this.status = status;
+        this.litOccupe = litOccupe;
     }
 
-    public Chambres(String num, boolean dispo, Date dateDebut, Date dateFin, int refDossiers) {
-        this.id = id;
+    public Chambres(String num, String type, int capacite, String status, int litOccupe) {
         this.num = num;
-        this.dispo = dispo;
-        this.dateDebut = dateDebut;
-        this.dateFin = dateFin;
-        this.refDossiers = refDossiers;
+        this.type = type;
+        this.capacite = capacite;
+        this.status = status;
+        this.litOccupe = litOccupe;
     }
 
     public int getId() {
@@ -44,35 +41,47 @@ public class Chambres {
         this.num = num;
     }
 
-    public boolean isDispo() {
-        return dispo;
+    public String getType() {
+        return type;
     }
 
-    public void setDispo(boolean dispo) {
-        this.dispo = dispo;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public Date getDateDebut() {
-        return dateDebut;
+    public int getCapacite() {
+        return capacite;
     }
 
-    public void setDateDebut(Date dateDebut) {
-        this.dateDebut = dateDebut;
+    public void setCapacite(int capacite) {
+        this.capacite = capacite;
     }
 
-    public Date getDateFin() {
-        return dateFin;
+    public String getStatus() {
+        return status;
     }
 
-    public void setDateFin(Date dateFin) {
-        this.dateFin = dateFin;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public int getRefDossiers() {
-        return refDossiers;
+    public int getLitOccupe() {
+        return litOccupe;
     }
 
-    public void setRefDossiers(int refDossiers) {
-        this.refDossiers = refDossiers;
+    public void setLitOccupe(int litOccupe) {
+        this.litOccupe = litOccupe;
+    }
+
+    @Override
+    public String toString() {
+        return "Chambres{" +
+                "id=" + id +
+                ", num='" + num + '\'' +
+                ", type='" + type + '\'' +
+                ", capacite=" + capacite +
+                ", status='" + status + '\'' +
+                ", litOccupe=" + litOccupe +
+                '}';
     }
 }

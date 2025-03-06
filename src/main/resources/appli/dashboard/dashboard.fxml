@@ -5,10 +5,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane stylesheets="/styles/global.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="appli.dashboard.DashboardController">
+<BorderPane stylesheets="/styles/global.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.dashboard.DashboardController">
     <top>
         <HBox alignment="CENTER" styleClass="header">
-            <Label styleClass="page-title" fx:id="textHeader" text="Tableau de Bord" />
+            <Label fx:id="textHeader" styleClass="page-title" text="Tableau de Bord" />
         </HBox>
     </top>
     <left>
@@ -19,7 +19,8 @@
             <Button onAction="#showPatientManagement" styleClass="nav-button" text="Patients" />
             <Button onAction="#showMedicalRecords" styleClass="nav-button" text="Dossiers Médicaux" />
             <Button onAction="#showStockManagement" styleClass="nav-button" text="Stocks" />
-            <Button onAction="#handleLogout" styleClass="nav-button" text="Déconnexion" />
+            <Button onAction="#showChambreManagment" styleClass="nav-button" text="Chambres" />
+            <Button onAction="#handleLogout" prefWidth="86.0" styleClass="nav-button" text="Déconnexion" />
         </VBox>
     </left>
     <center>
