@@ -1,6 +1,7 @@
 package appli.dossierMedic;
 
 import appli.StartApplication;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -64,12 +65,11 @@ public class DossiersMedicauxController {
 
     @FXML
     public void initialize() {
-        // Initialisation des colonnes de la table
         patientColumn.setCellValueFactory(new PropertyValueFactory<>("refPatients"));
         dateArriveeColumn.setCellValueFactory(new PropertyValueFactory<>("dateArrivee"));
         symptomesColumn.setCellValueFactory(new PropertyValueFactory<>("symptomes"));
         niveauGraviteColumn.setCellValueFactory(new PropertyValueFactory<>("niveauGravite"));
-        etatColumn.setCellValueFactory(new PropertyValueFactory<>("refEtat"));
+        etatColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEtatLibelle()));
 
         // Charger les données initiales
         loadTableData();

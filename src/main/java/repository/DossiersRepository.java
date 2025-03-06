@@ -138,7 +138,12 @@ public class DossiersRepository {
         Database db = new Database();
         Connection cnx = db.getConnection();
 
-        PreparedStatement req = cnx.prepareStatement("SELECT * FROM dossiers");
+        // Ajout d'une jointure avec la table 'etat' pour récupérer le libellé de l'état
+        String sql = "SELECT d.id_dossiers, d.ref_patients, d.ref_user, d.date_arrivee, d.symptomes, d.niveau_gravite, d.ref_etat, d.date_cloture, e.libelle AS etat_libelle " +
+                "FROM dossiers d " +
+                "JOIN etat e ON d.ref_etat = e.id_etat";
+
+        PreparedStatement req = cnx.prepareStatement(sql);
         ResultSet rs = req.executeQuery();
 
         while (rs.next()) {
@@ -150,7 +155,8 @@ public class DossiersRepository {
                     rs.getString("symptomes"),
                     rs.getInt("niveau_gravite"),
                     rs.getInt("ref_etat"),
-                    rs.getDate("date_cloture")
+                    rs.getDate("date_cloture"),
+                    rs.getString("etat_libelle")
             ));
         }
 
@@ -162,28 +168,36 @@ public class DossiersRepository {
         Database db = new Database();
         Connection cnx = db.getConnection();
 
-        // Requête SQL pour rechercher des dossiers
-        String sql = "SELECT * FROM dossiers " +
-                "WHERE ref_patients IN (SELECT id_patients FROM patients WHERE nom LIKE ? OR prenom LIKE ?) " +
-                "OR symptomes LIKE ? " +
-                "OR niveau_gravite LIKE ? " +
-                "OR ref_etat IN (SELECT id_etat FROM etat WHERE libelle LIKE ?)";
+        // Requête SQL améliorée avec une jointure sur la table "etat" pour récupérer le libellé
+        String sql = "SELECT d.*, e.libelle AS etat_libelle FROM dossiers d " +
+                "LEFT JOIN etat e ON d.ref_etat = e.id_etat " +
+                "WHERE (d.ref_patients IN (SELECT id_patients FROM patients WHERE nom LIKE ? OR prenom LIKE ?)) " +
+                "OR d.symptomes LIKE ? " +
+                "OR d.ref_etat IN (SELECT id_etat FROM etat WHERE libelle LIKE ?) " +
+                "OR d.niveau_gravite = ?";
 
         PreparedStatement req = cnx.prepareStatement(sql);
         String likeQuery = "%" + searchQuery + "%";
+        int niveauGraviteQuery = -1;
+
+        try {
+            niveauGraviteQuery = Integer.parseInt(searchQuery);
+        } catch (NumberFormatException e) {
+            niveauGraviteQuery = -1; // Si ce n'est pas un nombre, on met une valeur par défaut
+        }
 
         // Remplissage des paramètres pour la requête
         req.setString(1, likeQuery); // Recherche par nom du patient
         req.setString(2, likeQuery); // Recherche par prénom du patient
         req.setString(3, likeQuery); // Recherche par symptômes
-        req.setString(4, likeQuery); // Recherche par niveau de gravité
-        req.setString(5, likeQuery); // Recherche par état (libellé)
+        req.setString(4, likeQuery); // Recherche par état (libellé)
+        req.setInt(5, niveauGraviteQuery); // Recherche par niveau de gravité (si valide)
 
         ResultSet rs = req.executeQuery();
 
         // Parcours des résultats et ajout à la liste
         while (rs.next()) {
-            dossiers.add(new Dossiers(
+            Dossiers dossier = new Dossiers(
                     rs.getInt("id_dossiers"),
                     rs.getInt("ref_patients"),
                     rs.getInt("ref_user"),
@@ -191,9 +205,17 @@ public class DossiersRepository {
                     rs.getString("symptomes"),
                     rs.getInt("niveau_gravite"),
                     rs.getInt("ref_etat"),
-                    rs.getDate("date_cloture")
-            ));
+                    rs.getDate("date_cloture"),
+                    rs.getString("etat_libelle")
+            );
+
+
+            // Ajout du libellé de l'état dans l'objet Dossiers (ajouter un champ si nécessaire)
+            dossier.setEtatLibelle(rs.getString("etat_libelle"));
+
+            dossiers.add(dossier);
         }
+
         return dossiers;
     }
 
