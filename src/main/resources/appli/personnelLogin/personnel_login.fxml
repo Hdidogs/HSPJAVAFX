@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.hsp.controllers.PersonnelLoginController"
+            prefHeight="400.0" prefWidth="600.0" styleClass="background">
+    <center>
+        <VBox alignment="CENTER" spacing="20.0">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
+
+            <Label text="Connexion Personnel HSP" styleClass="title-label">
+                <font>
+                    <Font name="System Bold" size="24.0"/>
+                </font>
+            </Label>
+
+            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@/images/personnel_icon.png"/>
+                </image>
+            </ImageView>
+
+            <ComboBox fx:id="roleComboBox" promptText="Sélectionnez votre rôle" prefWidth="250.0">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Médecin" />
+                        <String fx:value="Infirmier" />
+                        <String fx:value="Gestionnaire de produits" />
+                        <String fx:value="Réceptionniste" />
+                    </FXCollections>
+                </items>
+            </ComboBox>
+
+            <GridPane hgap="10" vgap="10" alignment="CENTER">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="200.0" prefWidth="250.0" />
+                </columnConstraints>
+
+                <Label text="Identifiant:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="usernameField" promptText="Entrez votre identifiant"
+                           GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                <Label text="Mot de passe:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <PasswordField fx:id="passwordField" promptText="Entrez votre mot de passe"
+                               GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            </GridPane>
+
+            <HBox alignment="CENTER" spacing="20.0">
+                <Button fx:id="loginButton" text="Connexion" onAction="#handleLogin"
+                        styleClass="primary-button" prefWidth="120.0" />
+                <Button fx:id="cancelButton" text="Annuler" onAction="#handleCancel"
+                        styleClass="cancel-button" prefWidth="120.0" />
+            </HBox>
+
+            <Label fx:id="errorMessage" styleClass="error-label" visible="false" />
+        </VBox>
+    </center>
+</BorderPane>
