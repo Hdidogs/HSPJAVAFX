@@ -104,6 +104,11 @@ public class DashboardController {
     }
 
     @FXML
+    private void showChambreManagment() throws IOException {
+        StartApplication.changeScene("GestionChambres/GestionChambres.fxml");
+    }
+
+    @FXML
     private void handleLogout() throws IOException {
         if (UserLog.clearInstance()) {
             StartApplication.changeScene("Login/Login.fxml");

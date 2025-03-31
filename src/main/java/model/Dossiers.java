@@ -11,8 +11,9 @@ public class Dossiers {
     private int niveauGravite;
     private int refEtat;
     private Date dateCloture;
+    private String etatLibelle;
 
-    public Dossiers(int id, int refPatients, int refUser, Date dateArrivee, String symptomes, int niveauGravite, int refEtat, Date dateCloture) {
+    public Dossiers(int id, int refPatients, int refUser, Date dateArrivee, String symptomes, int niveauGravite, int refEtat, Date dateCloture, String etatLibelle) {
         this.id = id;
         this.refPatients = refPatients;
         this.refUser = refUser;
@@ -21,6 +22,7 @@ public class Dossiers {
         this.niveauGravite = niveauGravite;
         this.refEtat = refEtat;
         this.dateCloture = dateCloture;
+        this.etatLibelle = etatLibelle;
     }
 
     public Dossiers(int refPatients, int refUser, Date dateArrivee, String symptomes, int niveauGravite, int refEtat, Date dateCloture) {
@@ -95,5 +97,13 @@ public class Dossiers {
 
     public void setDateCloture(Date dateCloture) {
         this.dateCloture = dateCloture;
+    }
+
+    public String getEtatLibelle() {
+        return etatLibelle;
+    }
+
+    public void setEtatLibelle(String etatLibelle) {
+        this.etatLibelle = etatLibelle;
     }
 }

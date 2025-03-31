@@ -3,18 +3,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.util.*?>
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="RoomController"
+      fx:controller="appli.chambres.ChambresController"
       spacing="10" style="-fx-padding: 15px;">
-    
+
     <Label text="Gestion des Chambres" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
-    
+
     <HBox spacing="10">
         <VBox spacing="10" style="-fx-padding: 10px; -fx-border-color: #e0e0e0; -fx-border-radius: 5px;" HBox.hgrow="ALWAYS">
             <Label text="Ajouter une nouvelle chambre" style="-fx-font-weight: bold;"/>
-            
+
             <GridPane hgap="10" vgap="10">
                 <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
@@ -25,44 +26,45 @@
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 </rowConstraints>
-                
+
                 <Label text="Numéro:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                <TextField fx:id="roomNumberField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-                
+                <TextField fx:id="chambreNumberField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
                 <Label text="Type:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                <ComboBox fx:id="roomTypeComboBox" GridPane.rowIndex="1" GridPane.columnIndex="1" maxWidth="Infinity"/>
-                
+                <ComboBox fx:id="roomTypeComboBox" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
                 <Label text="Capacité:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
                 <Spinner fx:id="capacitySpinner" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
             </GridPane>
-            
+
             <HBox spacing="10" alignment="CENTER_RIGHT">
-                <Button text="Ajouter" onAction="#addRoom" style="-fx-background-color: #2ecc71; -fx-text-fill: white;"/>
-                <Button text="Réinitialiser" onAction="#resetRoomForm"/>
+                <Button text="Ajouter" onAction="#handleAdd" style="-fx-background-color: #2ecc71; -fx-text-fill: white;"/>
+                <Button mnemonicParsing="false" onAction="#backButton" text="Retour"/>
             </HBox>
         </VBox>
-        
+
         <VBox spacing="10" style="-fx-padding: 10px; -fx-border-color: #e0e0e0; -fx-border-radius: 5px;" HBox.hgrow="ALWAYS">
             <Label text="Rechercher des chambres" style="-fx-font-weight: bold;"/>
-            
+
             <HBox spacing="10" alignment="CENTER_LEFT">
                 <Label text="Statut:"/>
                 <ComboBox fx:id="statusFilterComboBox" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
-                <Button text="Rechercher" onAction="#searchRooms"/>
+                <TextField fx:id="searchField" promptText="Rechercher" HBox.hgrow="ALWAYS"/>
+                <Button text="Rechercher" onAction="#handleSearch"/>
                 <Button text="Réinitialiser" onAction="#resetSearch"/>
             </HBox>
         </VBox>
     </HBox>
-    
-    <TableView fx:id="roomsTableView" VBox.vgrow="ALWAYS">
+
+    <TableView fx:id="chambreTableView" VBox.vgrow="ALWAYS">
         <columns>
-            <TableColumn fx:id="roomNumberColumn" text="Numéro"/>
-            <TableColumn fx:id="roomTypeColumn" text="Type"/>
-            <TableColumn fx:id="capacityColumn" text="Capacité"/>
+            <TableColumn fx:id="chambreNumberColumn" text="Numéro"/>
+            <TableColumn fx:id="chambreTypeColumn" text="Type"/>
+            <TableColumn fx:id="capaciteColumn" text="Capacité"/>
             <TableColumn fx:id="statusColumn" text="Statut"/>
-            <TableColumn fx:id="occupiedBedsColumn" text="Lits occupés"/>
-            <TableColumn fx:id="actionsColumn" text="Actions"/>
+            <TableColumn fx:id="litoccuperColumn" text="Lits occupés"/>
         </columns>
     </TableView>
-</VBox>
 
+</VBox>
