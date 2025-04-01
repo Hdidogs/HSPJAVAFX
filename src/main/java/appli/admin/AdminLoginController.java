@@ -1,17 +1,13 @@
 package com.hsp.controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-
-import java.io.IOException;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class AdminLoginController {
 
@@ -30,68 +26,38 @@ public class AdminLoginController {
     @FXML
     private Label errorMessage;
 
-    @FXML
-    public void initialize() {
-        // Initialisation des composants
-        errorMessage.setVisible(false);
-    }
-
+    /**
+     * Méthode appelée lors du clic sur le bouton "Connexion".
+     * Elle vérifie les informations saisies et affiche un message en cas d'erreur ou procède à la connexion.
+     */
     @FXML
     private void handleLogin(ActionEvent event) {
-        String username = usernameField.getText().trim();
-        String password = passwordField.getText().trim();
+        String username = usernameField.getText();
+        String password = passwordField.getText();
 
-        if (username.isEmpty() || password.isEmpty()) {
-            showError("Veuillez remplir tous les champs");
-            return;
-        }
-
-        // Ici, vous devriez implémenter la vérification des identifiants
-        // avec votre service d'authentification
-        boolean isAuthenticated = authenticateAdmin(username, password);
-
-        if (isAuthenticated) {
-            try {
-                // Redirection vers le tableau de bord administrateur
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/hsp/views/admin_dashboard.fxml"));
-                Parent root = loader.load();
-
-                Stage stage = (Stage) loginButton.getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.setTitle("HSP - Tableau de bord administrateur");
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-                showError("Erreur lors du chargement du tableau de bord");
-            }
+        // Exemple de vérification (à adapter avec une vraie authentification)
+        if ("admin".equals(username) && "password".equals(password)) {
+            errorMessage.setVisible(false);
+            // TODO : ajouter la logique pour une connexion réussie (par exemple, changement de scène)
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Connexion réussie");
+            alert.setHeaderText(null);
+            alert.setContentText("Vous êtes connecté !");
+            alert.showAndWait();
         } else {
-            showError("Identifiants incorrects");
+            errorMessage.setText("Identifiant ou mot de passe incorrect");
+            errorMessage.setVisible(true);
         }
     }
 
+    /**
+     * Méthode appelée lors du clic sur le bouton "Annuler".
+     * Elle réinitialise les champs de saisie et masque le message d'erreur.
+     */
     @FXML
     private void handleCancel(ActionEvent event) {
-        // Réinitialiser les champs
         usernameField.clear();
         passwordField.clear();
         errorMessage.setVisible(false);
-
-        // Optionnel: fermer l'application ou revenir à l'écran précédent
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
-    }
-
-    private boolean authenticateAdmin(String username, String password) {
-        // Implémentation fictive - à remplacer par votre logique d'authentification
-        // Connectez-vous à votre base de données ou service d'authentification
-
-        // Exemple simple pour démonstration
-        return username.equals("admin") && password.equals("admin123");
-    }
-
-    private void showError(String message) {
-        errorMessage.setText(message);
-        errorMessage.setVisible(true);
     }
 }
