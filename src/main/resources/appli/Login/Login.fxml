@@ -12,14 +12,14 @@
         </padding>
         <Label text="Système de Gestion Hospitalière" styleClass="main-title"/>
         <TabPane>
-            <Tab text="Connexion">
+            <Tab text="Connexion" closable="false">
                 <VBox spacing="15">
                     <TextField fx:id="loginEmailField" promptText="Email" styleClass="input-field"/>
                     <PasswordField fx:id="loginPasswordField" promptText="Mot de passe" styleClass="input-field"/>
                     <Button text="Se connecter" onAction="#handleLogin" styleClass="primary-button"/>
                 </VBox>
             </Tab>
-            <Tab text="Inscription">
+            <Tab text="Inscription" closable="false">
                 <VBox spacing="15">
                     <TextField fx:id="registerNameField" promptText="Nom" styleClass="input-field"/>
                     <TextField fx:id="registerFirstNameField" promptText="Prenom" styleClass="input-field"/>

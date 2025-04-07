@@ -16,10 +16,10 @@
             <padding>
                 <Insets bottom="20" left="10" right="10" top="20" />
             </padding>
-            <Button onAction="#showPatientManagement" styleClass="nav-button" text="Patients" />
-            <Button onAction="#showMedicalRecords" styleClass="nav-button" text="Dossiers Médicaux" />
-            <Button onAction="#showStockManagement" styleClass="nav-button" text="Stocks" />
-            <Button onAction="#showChambreManagment" styleClass="nav-button" text="Chambres" />
+            <Button fx:id="patientbutton" onAction="#showPatientManagement" styleClass="nav-button" text="Patients" />
+            <Button fx:id="dossiersbutton" onAction="#showMedicalRecords" styleClass="nav-button" text="Dossiers Médicaux" />
+            <Button fx:id="stocksbutton" onAction="#showStockManagement" styleClass="nav-button" text="Stocks" />
+            <Button fx:id="chambresbutton" onAction="#showChambreManagment" styleClass="nav-button" text="Chambres" />
             <Button onAction="#handleLogout" prefWidth="86.0" styleClass="nav-button" text="Déconnexion" />
         </VBox>
     </left>

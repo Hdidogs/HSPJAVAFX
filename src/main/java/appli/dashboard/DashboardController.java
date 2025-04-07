@@ -2,11 +2,13 @@ package appli.dashboard;
 
 import appli.StartApplication;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import model.Etats;
+import model.Roles;
 import model.UserLog;
 import repository.DossiersRepository;
 import repository.EtatsRepository;
@@ -18,6 +20,17 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class DashboardController {
+    @FXML
+    private Button patientbutton;
+
+    @FXML
+    private Button dossiersbutton;
+
+    @FXML
+    private Button stocksbutton;
+
+    @FXML
+    private Button chambresbutton;
 
     @FXML
     private Label patientCountLabel;
@@ -47,6 +60,20 @@ public class DashboardController {
         loadStatistics();
         loadPatientStatsChart();
         loadAdmissionsChart();
+
+        if (UserLog.getInstance().getRefRole() == Roles.SECRETAIRE.getI()) {
+            chambresbutton.setManaged(false);
+            chambresbutton.setVisible(false);
+            stocksbutton.setManaged(false);
+            stocksbutton.setVisible(false);
+        } else if (UserLog.getInstance().getRefRole() == Roles.GESTIONNAIREDESTOCK.getI()) {
+            chambresbutton.setManaged(false);
+            chambresbutton.setVisible(false);
+            patientbutton.setManaged(false);
+            patientbutton.setVisible(false);
+            dossiersbutton.setManaged(false);
+            dossiersbutton.setVisible(false);
+        }
     }
 
     private void loadStatistics() throws SQLException {
