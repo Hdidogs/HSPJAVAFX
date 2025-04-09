@@ -16,19 +16,12 @@
             <padding>
                 <Insets bottom="20" left="10" right="10" top="20" />
             </padding>
-<<<<<<< HEAD
-            <Button onAction="#showPatientManagement" styleClass="nav-button" text="Patients" />
-            <Button onAction="#showMedicalRecords" styleClass="nav-button" text="Dossiers Médicaux" />
-            <Button onAction="#showStockManagement" styleClass="nav-button" text="Stocks" />
-            <Button onAction="#showChambreManagment" styleClass="nav-button" text="Chambres" />
             <!-- Nouveau bouton ajouté pour la gestion admin -->
             <Button onAction="#showGestionChambresPatient" styleClass="nav-button" text="Gestion Chambres Patient" />
-=======
             <Button fx:id="patientbutton" onAction="#showPatientManagement" styleClass="nav-button" text="Patients" />
             <Button fx:id="dossiersbutton" onAction="#showMedicalRecords" styleClass="nav-button" text="Dossiers Médicaux" />
             <Button fx:id="stocksbutton" onAction="#showStockManagement" styleClass="nav-button" text="Stocks" />
             <Button fx:id="chambresbutton" onAction="#showChambreManagment" styleClass="nav-button" text="Chambres" />
->>>>>>> 70f424e6a00415b1c889fb17fd28431549b15dcb
             <Button onAction="#handleLogout" prefWidth="86.0" styleClass="nav-button" text="Déconnexion" />
         </VBox>
     </left>

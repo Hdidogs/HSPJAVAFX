@@ -1,5 +1,6 @@
 package appli.GestionChambresPatient;
 
+import appli.StartApplication;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import model.Patients;
 import repository.ChambresRepository;
 import repository.PatientsRepository;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -146,5 +148,11 @@ public class GestionChambresPatientController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    // Ajout de la méthode backButton pour gérer l'action du bouton "Retour"
+    @FXML
+    private void backButton() throws IOException {
+        StartApplication.changeScene("dashboard/dashboard.fxml");
     }
 }

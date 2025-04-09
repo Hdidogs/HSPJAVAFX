@@ -71,4 +71,9 @@
             </columns>
         </TableView>
     </TitledPane>
+
+    <!-- Bouton Retour ajouté -->
+    <HBox alignment="CENTER_RIGHT" spacing="10">
+        <Button mnemonicParsing="false" onAction="#backButton" text="Retour"/>
+    </HBox>
 </VBox>
