@@ -20,6 +20,8 @@
             <Button onAction="#showMedicalRecords" styleClass="nav-button" text="Dossiers Médicaux" />
             <Button onAction="#showStockManagement" styleClass="nav-button" text="Stocks" />
             <Button onAction="#showChambreManagment" styleClass="nav-button" text="Chambres" />
+            <!-- Nouveau bouton ajouté pour la gestion admin -->
+            <Button onAction="#showGestionChambresPatient" styleClass="nav-button" text="Gestion Chambres Patient" />
             <Button onAction="#handleLogout" prefWidth="86.0" styleClass="nav-button" text="Déconnexion" />
         </VBox>
     </left>

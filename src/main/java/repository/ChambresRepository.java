@@ -81,6 +81,25 @@ public class ChambresRepository {
         return chambres;
     }
 
+    public static boolean assignPatientToRoom(int patientId, int chambreId) throws SQLException {
+        try (Connection cnx = getConnection()) {
+            // 1. Insérer dans la table hospitalisations
+            PreparedStatement insert = cnx.prepareStatement("INSERT INTO hospitalisations (id_patient, id_chambre, date_admission) VALUES (?, ?, NOW())");
+            insert.setInt(1, patientId);
+            insert.setInt(2, chambreId);
+            int rows = insert.executeUpdate();
+
+            if (rows > 0) {
+                // 2. Incrémenter lit occupé dans chambre
+                PreparedStatement update = cnx.prepareStatement("UPDATE chambres SET litoccupe = litoccupe + 1 WHERE id_chambres = ?");
+                update.setInt(1, chambreId);
+                return update.executeUpdate() > 0;
+            }
+        }
+        return false;
+    }
+
+
     public static List<Chambres> searchChambres(String searchQuery, String type, String statusFilter) throws SQLException {
         List<Chambres> chambres = new ArrayList<>();
 
@@ -105,7 +124,7 @@ public class ChambresRepository {
 
         List<Chambres> filteredChambres = new ArrayList<>();
 
-        for (Chambres chambre : chambres) {
+        for (Chambres chambre   : chambres) {
             boolean matches = true;
 
             if (searchQuery != null && !searchQuery.isEmpty()) {

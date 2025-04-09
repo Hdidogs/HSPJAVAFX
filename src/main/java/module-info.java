@@ -13,6 +13,7 @@ module appli.todolistfx {
 
     opens appli to javafx.fxml;
     exports appli;
+    opens appli.GestionChambresPatient to javafx.fxml;
     opens appli.dashboard to javafx.fxml;
     opens appli.dossierMedic to javafx.fxml;
     opens appli.patients to javafx.fxml;

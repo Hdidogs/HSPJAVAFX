@@ -6,11 +6,11 @@
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="AssignmentController"
+      fx:controller="appli.GestionChambresPatient.GestionChambresPatientController"
       spacing="10" style="-fx-padding: 15px;">
-    
+
     <Label text="Affectation des Patients aux Chambres" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
-    
+
     <HBox spacing="15">
         <VBox spacing="10" HBox.hgrow="ALWAYS" style="-fx-padding: 10px; -fx-border-color: #e0e0e0; -fx-border-radius: 5px;">
             <Label text="Patients sans chambre" style="-fx-font-weight: bold;"/>
@@ -23,7 +23,7 @@
                 </columns>
             </TableView>
         </VBox>
-        
+
         <VBox spacing="10" HBox.hgrow="ALWAYS" style="-fx-padding: 10px; -fx-border-color: #e0e0e0; -fx-border-radius: 5px;">
             <Label text="Chambres disponibles" style="-fx-font-weight: bold;"/>
             <HBox spacing="10" alignment="CENTER_LEFT">
@@ -41,25 +41,25 @@
             </TableView>
         </VBox>
     </HBox>
-    
+
     <HBox spacing="10" style="-fx-padding: 10px; -fx-border-color: #e0e0e0; -fx-border-radius: 5px;">
         <VBox spacing="5" HBox.hgrow="ALWAYS">
             <Label text="Patient sélectionné:" style="-fx-font-weight: bold;"/>
             <Label fx:id="selectedPatientLabel" text="Aucun patient sélectionné" style="-fx-font-style: italic;"/>
         </VBox>
-        
+
         <VBox spacing="5" HBox.hgrow="ALWAYS">
             <Label text="Chambre sélectionnée:" style="-fx-font-weight: bold;"/>
             <Label fx:id="selectedRoomLabel" text="Aucune chambre sélectionnée" style="-fx-font-style: italic;"/>
         </VBox>
-        
+
         <VBox alignment="CENTER" HBox.hgrow="NEVER">
-            <Button text="Affecter le patient" onAction="#assignPatientToRoom" 
-                    style="-fx-background-color: #3498db; -fx-text-fill: white;" 
+            <Button text="Affecter le patient" onAction="#assignPatientToRoom"
+                    style="-fx-background-color: #3498db; -fx-text-fill: white;"
                     disable="${controller.assignButtonDisabled}"/>
         </VBox>
     </HBox>
-    
+
     <TitledPane text="Patients hospitalisés" expanded="false">
         <TableView fx:id="assignedPatientsTable">
             <columns>
@@ -72,4 +72,3 @@
         </TableView>
     </TitledPane>
 </VBox>
-

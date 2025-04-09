@@ -52,7 +52,7 @@ public class DashboardController {
     private void loadStatistics() throws SQLException {
         int totalPatients = PatientsRepository.getNumberPatients();
         int activeDossiers = DossiersRepository.getDossiersActive();
-        int closeDossiers = DossiersRepository.getDossiersClose();;
+        int closeDossiers = DossiersRepository.getDossiersClose();
         int stockCount = ProduitsRepository.getNumberProduits();
 
         // Mise à jour des labels
@@ -106,6 +106,13 @@ public class DashboardController {
     @FXML
     private void showChambreManagment() throws IOException {
         StartApplication.changeScene("GestionChambres/GestionChambres.fxml");
+    }
+
+    // Nouvelle méthode pour le bouton "Gestion Chambres Patient"
+    @FXML
+    private void showGestionChambresPatient() throws IOException {
+        // Adaptez le chemin vers votre fichier FXML de gestion admin
+        StartApplication.changeScene("GestionChambresPatient/GestionChambresPatient.fxml");
     }
 
     @FXML
