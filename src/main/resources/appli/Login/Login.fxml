@@ -1,35 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.*?>
 
 <StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="appli.user.LoginController"
-           stylesheets="/styles/global.css">
-    <VBox alignment="CENTER" spacing="20.0" maxWidth="400" styleClass="form-container">
-        <padding>
-            <Insets top="20" right="20" bottom="20" left="20"/>
-        </padding>
-        <Label text="Système de Gestion Hospitalière" styleClass="main-title"/>
-        <TabPane>
-            <Tab text="Connexion" closable="false">
-                <VBox spacing="15">
-                    <TextField fx:id="loginEmailField" promptText="Email" styleClass="input-field"/>
-                    <PasswordField fx:id="loginPasswordField" promptText="Mot de passe" styleClass="input-field"/>
-                    <Button text="Se connecter" onAction="#handleLogin" styleClass="primary-button"/>
-                </VBox>
-            </Tab>
-            <Tab text="Inscription" closable="false">
-                <VBox spacing="15">
-                    <TextField fx:id="registerNameField" promptText="Nom" styleClass="input-field"/>
-                    <TextField fx:id="registerFirstNameField" promptText="Prenom" styleClass="input-field"/>
-                    <TextField fx:id="registerEmailField" promptText="Email" styleClass="input-field"/>
-                    <PasswordField fx:id="registerPasswordField" promptText="Mot de passe" styleClass="input-field"/>
-                    <PasswordField fx:id="confirmPasswordField" promptText="Confirmer le mot de passe" styleClass="input-field"/>
-                    <Button text="S'inscrire" onAction="#handleRegister" styleClass="secondary-button"/>
-                </VBox>
-            </Tab>
-        </TabPane>
-    </VBox>
-</StackPane>
+           stylesheets="/styles/modern.css">
 
+    <AnchorPane>
+        <VBox layoutX="0" layoutY="0" prefWidth="600" alignment="CENTER" spacing="30" styleClass="form-container" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+            <padding>
+                <Insets top="60" right="50" bottom="60" left="50"/>
+            </padding>
+
+            <!-- Titre Principal -->
+            <Label text="🏥 Système de Gestion Hospitalière" styleClass="main-title"/>
+
+            <!-- Encadré avec effet carte -->
+            <StackPane styleClass="card">
+                <TabPane tabClosingPolicy="UNAVAILABLE" styleClass="tab-pane">
+                    <!-- Onglet Connexion -->
+                    <Tab text="🔐 Connexion" closable="false">
+                        <VBox spacing="15" styleClass="tab-content">
+                            <TextField fx:id="loginEmailField" promptText="Adresse email" styleClass="input-field"/>
+                            <PasswordField fx:id="loginPasswordField" promptText="Mot de passe" styleClass="input-field"/>
+                            <Button text="Se connecter" onAction="#handleLogin" styleClass="primary-button"/>
+                        </VBox>
+                    </Tab>
+
+                    <!-- Onglet Inscription -->
+                    <Tab text="📝 Inscription" closable="false">
+                        <VBox spacing="15" styleClass="tab-content">
+                            <TextField fx:id="registerNameField" promptText="Nom" styleClass="input-field"/>
+                            <TextField fx:id="registerFirstNameField" promptText="Prénom" styleClass="input-field"/>
+                            <TextField fx:id="registerEmailField" promptText="Adresse email" styleClass="input-field"/>
+                            <PasswordField fx:id="registerPasswordField" promptText="Mot de passe" styleClass="input-field"/>
+                            <PasswordField fx:id="confirmPasswordField" promptText="Confirmer le mot de passe" styleClass="input-field"/>
+                            <Button text="S'inscrire" onAction="#handleRegister" styleClass="secondary-button"/>
+                        </VBox>
+                    </Tab>
+                </TabPane>
+            </StackPane>
+        </VBox>
+    </AnchorPane>
+</StackPane>
